@@ -2,7 +2,6 @@
 <Package xmlns="http://soap.sforce.com/2006/04/metadata">
     <types>
         <members>enhancedPath</members>
-        <members>ldsUtils</members>
         <members>enhancedPathModal</members>
         <name>LightningComponentBundle</name>
     </types>
