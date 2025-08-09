@@ -1,0 +1,49 @@
+/**
+ * Created by Tyler on 7/8/2025.
+ */
+
+.path-scroller {
+    overflow-x: auto;
+    overflow-y: hidden;
+    -webkit-overflow-scrolling: touch;
+    width: 100%;
+    scrollbar-width: none; /* Firefox */
+}
+
+.path-scroller::-webkit-scrollbar {
+    display: none; /* Chrome, Safari, Opera */
+}
+
+.path-scroller-inner {
+    display: flex;
+    flex-wrap: nowrap;
+    min-width: max-content;
+    height: 100%;
+}
+
+.scrollable-path {
+    overflow-x: auto;
+    white-space: nowrap;
+    -webkit-overflow-scrolling: touch;
+    max-width: 100%;
+}
+
+.path-layout-item {
+    min-width: 0;
+    flex-basis: 0;
+    flex-grow: 1;
+}
+
+.button-layout-item {
+    flex-grow: 0;
+    flex-shrink: 0;
+}
+
+.path-disabled {
+    pointer-events: none;
+    opacity: 0.6;
+}
+
+.user-select-none {
+    user-select: none;
+}

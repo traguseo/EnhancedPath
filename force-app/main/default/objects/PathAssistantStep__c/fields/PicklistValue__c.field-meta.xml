@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>PicklistValue__c</fullName>
+    <externalId>false</externalId>
+    <inlineHelpText>The Picklist API Value this Step represents</inlineHelpText>
+    <label>Picklist Value</label>
+    <length>255</length>
+    <required>true</required>
+    <trackTrending>false</trackTrending>
+    <type>Text</type>
+    <unique>false</unique>
+</CustomField>

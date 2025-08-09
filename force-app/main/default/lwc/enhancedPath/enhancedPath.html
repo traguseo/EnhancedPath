@@ -1,0 +1,134 @@
+<!--
+ - Created by Tyler on 7/8/2025.
+ -->
+
+<template>
+    <lightning-card hide-header="true" variant="narrow" label="enhancedPath">
+        <!-- Spinner -->
+        <template lwc:if={showSpinner}>
+            <lightning-spinner alternative-text="Saving" size="medium" variant="brand"></lightning-spinner>
+        </template>
+        <!-- Path Bar -->
+        <template lwc:if={displayedStepsWithClass}>
+            <lightning-layout multiple-rows="true">
+                <lightning-layout-item flexibility="grow" class="slds-p-left_small slds-p-right_small path-layout-item">
+                    <div class="path-scroller scrollable-path">
+                        <div class={pathDisabledClass}>
+                            <ul
+                                class="slds-path__nav path-scroller-inner user-select-none"
+                                role="listbox"
+                                aria-orientation="horizontal"
+                                aria-labelledby="slds-path__stage-name"
+                            >
+                                <template for:each={displayedStepsWithClass} for:item="step">
+                                    <li key={step.label} class={step.stepClass}>
+                                        <a
+                                            aria-selected="true"
+                                            class="slds-path__link"
+                                            role="option"
+                                            data-label={step.label}
+                                            data-value={step.value}
+                                            data-index={step}
+                                            onclick={handleStageClick}
+                                        >
+                                            <span class="slds-path__stage">
+                                                <template lwc:if={step.isComplete}>
+                                                    <lightning-icon
+                                                        icon-name="utility:check"
+                                                        size="x-small"
+                                                        variant="inverse"
+                                                    ></lightning-icon>
+                                                </template>
+                                            </span>
+                                            <span class="slds-path__title user-select-none">{step.label}</span>
+                                        </a>
+                                    </li>
+                                </template>
+                            </ul>
+                        </div>
+                    </div>
+                </lightning-layout-item>
+                <!-- Button for Desktop -->
+                <lightning-layout-item
+                    flexibility="shrink"
+                    class="slds-p-right_small slds-align_absolute-center slds-show_medium button-layout-item"
+                >
+                    <lightning-button
+                        variant="brand"
+                        label={buttonLabel}
+                        onclick={handleMarkComplete}
+                        disabled={disableCompleteButton}
+                        icon-name={completeButtonIconName}
+                    ></lightning-button>
+                </lightning-layout-item>
+                <!-- Display Selected Label For Tablet/Mobile -->
+                <lightning-layout-item
+                    size="12"
+                    flexibility="shrink"
+                    class="slds-hide_medium slds-text-align_center slds-p-top_small slds-p-bottom_small"
+                >
+                    <strong>Selected {fieldLabel}:</strong> {selectedLabel}
+                </lightning-layout-item>
+                <!-- Button for Tablet/Mobile -->
+                <lightning-layout-item
+                    size="12"
+                    flexibility="shrink"
+                    class="slds-p-bottom_x-small slds-align_absolute-center slds-hide_medium button-layout-item"
+                >
+                    <lightning-button
+                        variant="brand"
+                        label={buttonLabel}
+                        onclick={handleMarkComplete}
+                        disabled={disableCompleteButton}
+                        icon-name={completeButtonIconName}
+                    ></lightning-button>
+                </lightning-layout-item>
+            </lightning-layout>
+            <!-- Coaching Panel -->
+            <template lwc:if={showCoachingPanel}>
+                <div class="slds-path__content">
+                    <div class="slds-path__coach">
+                        <!-- Key Fields -->
+                        <lightning-layout multiple-rows="true">
+                            <template lwc:if={showKeyFields}>
+                                <lightning-layout-item
+                                    size="12"
+                                    large-device-size={leftSideCoachingPanelLargeDeviceColumnSize}
+                                    flexibility="grow"
+                                    class="slds-p-left_medium slds-p-right_medium"
+                                >
+                                    <h2 class="slds-p-top_x-small slds-text-title_bold">Key Fields</h2>
+                                    <lightning-record-form
+                                        object-api-name={objectApiName}
+                                        record-id={recordId}
+                                        fields={selectedValuePathStep.keyFields}
+                                        mode="view"
+                                        onsubmit={handleRecordFormSubmit}
+                                        density="compact"
+                                        class="slds-p-left_small"
+                                    ></lightning-record-form>
+                                </lightning-layout-item>
+                            </template>
+                            <!-- Guidance for Success -->
+                            <template lwc:if={showGuidance}>
+                                <lightning-layout-item
+                                    size="12"
+                                    large-device-size={rightSideCoachingPanelLargeDeviceColumnSize}
+                                    flexibility="auto"
+                                    class="slds-p-left_medium slds-p-right_small"
+                                >
+                                    <h2 class="slds-p-top_x-small slds-p-bottom_small slds-text-title_bold">
+                                        Guidance for Success
+                                    </h2>
+                                    <lightning-formatted-rich-text
+                                        value={selectedValuePathStep.guidance}
+                                    ></lightning-formatted-rich-text>
+                                </lightning-layout-item>
+                            </template>
+                        </lightning-layout>
+                    </div>
+                </div>
+            </template>
+        </template>
+    </lightning-card>
+</template>

@@ -1,0 +1,20 @@
+{
+  "packageDirectories": [
+    {
+      "path": "force-app",
+      "default": true,
+      "package": "EnhancedPath",
+      "versionName": "ver 0.1",
+      "versionNumber": "0.1.0.NEXT",
+      "versionDescription": ""
+    }
+  ],
+  "name": "EnhancedPathUnlockedPackage",
+  "namespace": "",
+  "sfdcLoginUrl": "https://login.salesforce.com",
+  "sourceApiVersion": "64.0",
+  "packageAliases": {
+    "EnhancedPath": "0HogL0000000P9hSAE",
+    "EnhancedPath@0.1.0-1": "04tgL0000004jxpQAA"
+  }
+}

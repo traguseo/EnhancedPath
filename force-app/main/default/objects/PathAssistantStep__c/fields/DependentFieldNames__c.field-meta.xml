@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>DependentFieldNames__c</fullName>
+    <inlineHelpText>A comma separated list of Field API Names that will be treated as Required Dependent Fields for this Picklist Value. This is in addition to any field dependencies already defined at the object level and is primarily intended to be used for fields that typically aren&apos;t able to be considered dependent</inlineHelpText>
+    <label>Dependent Field Names</label>
+    <length>32768</length>
+    <trackTrending>false</trackTrending>
+    <type>LongTextArea</type>
+    <visibleLines>3</visibleLines>
+</CustomField>

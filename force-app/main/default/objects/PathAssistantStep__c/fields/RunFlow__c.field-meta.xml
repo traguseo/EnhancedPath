@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>RunFlow__c</fullName>
+    <defaultValue>false</defaultValue>
+    <inlineHelpText>When a user attempts to update the field to this Picklist Value, should a flow run?</inlineHelpText>
+    <label>Run Flow</label>
+    <trackTrending>false</trackTrending>
+    <type>Checkbox</type>
+</CustomField>
