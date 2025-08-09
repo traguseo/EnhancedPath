@@ -422,7 +422,7 @@ export default class EnhancedPath extends LightningElement {
                 } else if (result.enhancedPathStatus === "error") {
                     this._logErrorAndToast(
                         `Error updating ${this.fieldLabel} to ${this.selectedLabel}!`,
-                        this._labelErrorsWithNumbers(result.error),
+                        this._labelErrorsWithNumbers(this._reduceErrors(result.error)),
                         "error",
                         result.error
                     );
