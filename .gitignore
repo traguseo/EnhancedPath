@@ -8,6 +8,10 @@
 .localdevserver/
 deploy-options.json
 
+.idea/
+config/
+manifest/
+
 # LWC VSCode autocomplete
 **/lwc/jsconfig.json
 

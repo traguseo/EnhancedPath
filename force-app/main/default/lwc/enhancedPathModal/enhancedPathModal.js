@@ -32,7 +32,16 @@ export default class EnhancedPathModal extends LightningModal {
         } else if (event.detail.status === "ERROR") {
             this.close({ enhancedPathStatus: "error", error: event.detail });
         } else if (event.detail.status === "FINISHED" || event.detail.status === "FINISHED_SCREEN") {
-            this.close({ enhancedPathStatus: "success" });
+            let outputVariables = event.detail.outputVariables || [];
+            console.log("ENHANCEDPATH-Flow output variables: ", outputVariables);
+            if (
+                outputVariables.length > 0 &&
+                outputVariables.some((variable) => variable.name === "enhancedPathOverride" && variable.value === true)
+            ) {
+                this.close({ enhancedPathStatus: "override" });
+            } else {
+                this.close({ enhancedPathStatus: "success" });
+            }
         }
     }
 

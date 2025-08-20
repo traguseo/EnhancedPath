@@ -4,64 +4,66 @@
 
 <!-- Enhanced Path Modal -->
 <template>
-    <lightning-modal-body class="slds-is-relative">
-        <lightning-layout multiple-rows="true">
-            <!-- Spinner -->
-            <template lwc:if={isLoading}>
-                <lightning-spinner alternative-text="Loading" size="medium" variant="brand"></lightning-spinner>
-            </template>
-            <!-- Dependent Fields -->
-            <template lwc:if={showDependentFields}>
-                <lightning-layout-item size="12" flexibility="grow" class="slds-p-left_medium slds-p-right_medium">
-                    <h2 class="slds-text-heading_small slds-p-bottom_small slds-p-top_x-small slds-text-title_bold">
-                        Moving the {fieldLabel} to {selectedLabel} requires dependent fields to be filled out!
-                    </h2>
-                    <lightning-record-edit-form
-                        object-api-name={objectApiName}
-                        record-id={recordId}
-                        record-type-id={recordTypeId}
-                        onsubmit={handleRecordFormSubmit}
-                        onload={handleFormLoaded}
-                    >
-                        <lightning-input-field
-                            field-name={fieldApiName}
-                            value={selectedValue}
-                            required="true"
-                            disabled="true"
-                        ></lightning-input-field>
-                        <template for:each={dependentFields} for:item="dependentField">
+    <lightning-card hide-header="true" label="Enhanced Path Modal" variant="narrow">
+        <lightning-modal-body>
+            <lightning-layout multiple-rows="true">
+                <!-- Spinner -->
+                <template lwc:if={isLoading}>
+                    <lightning-spinner alternative-text="Loading" size="medium" variant="brand"></lightning-spinner>
+                </template>
+                <!-- Dependent Fields -->
+                <template lwc:if={showDependentFields}>
+                    <lightning-layout-item size="12" flexibility="grow" class="slds-p-left_medium slds-p-right_medium">
+                        <h2 class="slds-text-heading_small slds-p-bottom_small slds-p-top_x-small slds-text-title_bold">
+                            Moving the {fieldLabel} to {selectedLabel} requires dependent fields to be filled out!
+                        </h2>
+                        <lightning-record-edit-form
+                            object-api-name={objectApiName}
+                            record-id={recordId}
+                            record-type-id={recordTypeId}
+                            onsubmit={handleRecordFormSubmit}
+                            onload={handleFormLoaded}
+                        >
                             <lightning-input-field
-                                field-name={dependentField}
-                                key={dependentField}
+                                field-name={fieldApiName}
+                                value={selectedValue}
                                 required="true"
+                                disabled="true"
                             ></lightning-input-field>
-                        </template>
-                        <lightning-button
-                            type="submit"
-                            label="Save"
-                            variant="brand"
-                            class="slds-p-top_small slds-align_absolute-center"
-                            disabled={isLoading}
-                        ></lightning-button>
-                    </lightning-record-edit-form>
-                </lightning-layout-item>
-            </template>
-            <template lwc:if={showFlow}>
-                <lightning-layout-item size="12" flexibility="grow" class="slds-p-left_medium slds-p-right_medium">
-                    <h2 class="slds-text-heading_small slds-p-bottom_small slds-p-top_x-small slds-text-title_bold">
-                        Moving the {fieldLabel} to {selectedLabel} requires additional steps!
-                    </h2>
-                    <lightning-flow
-                        flow-api-name={flowApiName}
-                        flow-input-variables={flowInputVariables}
-                        flow-finish-behavior="NONE"
-                        onstatuschange={handleFlowStatusChange}
-                        class="slds-p-around_medium"
-                    >
-                    </lightning-flow>
-                </lightning-layout-item>
-            </template>
-        </lightning-layout>
-    </lightning-modal-body>
-    <lightning-modal-footer></lightning-modal-footer>
+                            <template for:each={dependentFields} for:item="dependentField">
+                                <lightning-input-field
+                                    field-name={dependentField}
+                                    key={dependentField}
+                                    required="true"
+                                ></lightning-input-field>
+                            </template>
+                            <lightning-button
+                                type="submit"
+                                label="Save"
+                                variant="brand"
+                                class="slds-p-top_small slds-align_absolute-center"
+                                disabled={isLoading}
+                            ></lightning-button>
+                        </lightning-record-edit-form>
+                    </lightning-layout-item>
+                </template>
+                <template lwc:if={showFlow}>
+                    <lightning-layout-item size="12" flexibility="grow" class="slds-p-left_medium slds-p-right_medium">
+                        <h2 class="slds-text-heading_small slds-p-bottom_small slds-p-top_x-small slds-text-title_bold">
+                            Moving the {fieldLabel} to {selectedLabel} requires additional steps!
+                        </h2>
+                        <lightning-flow
+                            flow-api-name={flowApiName}
+                            flow-input-variables={flowInputVariables}
+                            flow-finish-behavior="NONE"
+                            onstatuschange={handleFlowStatusChange}
+                            class="slds-p-around_medium"
+                        >
+                        </lightning-flow>
+                    </lightning-layout-item>
+                </template>
+            </lightning-layout>
+        </lightning-modal-body>
+        <lightning-modal-footer></lightning-modal-footer>
+    </lightning-card>
 </template>

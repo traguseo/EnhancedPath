@@ -422,9 +422,15 @@ export default class EnhancedPath extends LightningElement {
                 } else if (result.enhancedPathStatus === "error") {
                     this._logErrorAndToast(
                         `Error updating ${this.fieldLabel} to ${this.selectedLabel}!`,
-                        this._labelErrorsWithNumbers(this._reduceErrors(result.error)),
+                        this._labelErrorsWithNumbers(reduceErrors(result.error)),
                         "error",
                         result.error
+                    );
+                } else if (result.enhancedPathStatus === "override") {
+                    this._sendToast(
+                        "Submitted",
+                        `The information you provided has been submitted and the ${this.fieldLabel} will be updated to ${this.selectedLabel} after approval!`,
+                        "info"
                     );
                 }
             })
