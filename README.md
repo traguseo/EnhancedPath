@@ -29,7 +29,7 @@ Aims to replicate and further extend the functionality of the SF native Path com
 ## Flow Input/Output Details and Overriding Toast Messages
 
 1. LWC always passes the same inputs to flow, these cannot be customized. They are 5 text variables and the expected names are: `newValue`, `oldValue`, `fieldApiName`, `objectApiName`, and `recordId`
-2. The toast that is sent upon closure of a flow can be controlled and customized using a boolean flow output variable named `enhancedPathOverride` and setting it's value to true. To customize the toast title, message, and variant use flow text output variables named `toastTitle`, `toastMessage`, and `toastVariant` [(see lightning-toast specs for list of variants)](https://developer.salesforce.com/docs/component-library/bundle/lightning-toast/specification)
+2. The toast that is sent when a flow finishes can be controlled and customized using a boolean flow output variable named `enhancedPathOverride` and setting it's value to true. To customize the toast title, message, and variant use flow text output variables named `toastTitle`, `toastMessage`, and `toastVariant` [(see lightning-toast specs for list of variants)](https://developer.salesforce.com/docs/component-library/bundle/lightning-toast/specification)
 3. **There's a gotcha when using a combination of fault paths, subflows, and flow output variables. Make sure you set your output variables before the last screen the user sees if you're passing to subflows (especially if in a fault path), otherwise your output variables may not have the proper values passed back to the LWC.
 
 ## How I Use This
