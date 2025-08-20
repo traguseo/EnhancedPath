@@ -38,7 +38,12 @@ export default class EnhancedPathModal extends LightningModal {
                 outputVariables.length > 0 &&
                 outputVariables.some((variable) => variable.name === "enhancedPathOverride" && variable.value === true)
             ) {
-                this.close({ enhancedPathStatus: "override" });
+                this.close({
+                    enhancedPathStatus: "override",
+                    toastTitle: outputVariables.find((variable) => variable.name === "toastTitle")?.value,
+                    toastMessage: outputVariables.find((variable) => variable.name === "toastMessage")?.value,
+                    toastVariant: outputVariables.find((variable) => variable.name === "toastVariant")?.value
+                });
             } else {
                 this.close({ enhancedPathStatus: "success" });
             }
@@ -62,7 +67,7 @@ export default class EnhancedPathModal extends LightningModal {
             })
             .catch((error) => {
                 this.disableClose = false;
-                this.close({ enhancedPathStatus: "error", error });
+                this.close({ enhancedPathStatus: "error", error: error });
             });
     }
 }
