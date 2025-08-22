@@ -22,7 +22,8 @@ Aims to replicate and further extend the functionality of the SF native Path com
 3. Assign the included `Enhanced Path Admin` and `Enhanced Path User` permission sets out to relevant users
 4. Create or update any `PathAssistant__c` and `PathAssistantStep__c` records to configure any additional functionality for desired object + record type + picklist field cominbations. Additonal functionality includes: requiring dependent fields other than picklists or running a flow
 
-`PathAssistant__c` records have an external id field which is used for querying and upserting, the expected format is: `ObjectAPIName_FieldAPIName_RecordTypeName` (so for example, `Lead_Status___MASTER__`
+`PathAssistant__c` records have an external id field which is used for querying and upserting, the expected format is: `ObjectAPIName_FieldAPIName_RecordTypeName` (so for example, `Lead_Status___MASTER__`)
+
 `PathAssistantStep__c` records also have an external id field, the expected format concatenates the picklist value to the parent `PathAssistant__c`'s external id: `ObjectAPIName_FieldAPIName_RecordTypeName_PicklistValue` (so for example, `Lead_Status___MASTER__Converted - Business`)
 
 
