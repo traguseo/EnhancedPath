@@ -17,7 +17,7 @@ Aims to replicate and further extend the functionality of the SF native Path com
 
 ## Setup Information
 
-1. After installing, schedule the `ScheduleQueueableSyncPathAssistants` job (I use every hour, but you could do whatever makes sense for your Org -- post install script coming for this eventually)
+1. After installing, schedule the `ScheduleQueueableSyncPathAssistants` job (I use every hour, but you could do whatever makes sense for your Org)
 2. Run the `QueueableSyncPathAssistants` job once manually (or wait for your scheduled job to run) to sync all existing Path Settings to the `PathAssitant__c` and `PathAssistantStep__c` objects (anon apex snippet: `System.enqueueJob(new QueueableSyncPathAssistants())`)
 3. Assign the included `Enhanced Path Admin` and `Enhanced Path User` permission sets out to relevant users
 4. Create or update any `PathAssistant__c` and `PathAssistantStep__c` records to configure any additional functionality for desired object + record type + picklist field cominbations. Additonal functionality includes: requiring dependent fields other than picklists or running a flow
