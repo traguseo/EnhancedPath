@@ -137,7 +137,8 @@ export default class EnhancedPath extends LightningElement {
     }
 
     get fields() {
-        return Object.values(this.objectInfo.recordTypeInfos).filter((recordType) => !recordType.master).length > 0
+        return Object.values(this.objectInfo.recordTypeInfos || {}).filter((recordType) => !recordType.master).length >
+            0
             ? [this.computedFieldApiName, `${this.objectApiName}.RecordType.DeveloperName`]
             : [this.computedFieldApiName];
     }
