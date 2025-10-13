@@ -44,6 +44,23 @@ export default class EnhancedPath extends LightningElement {
         }
     }
 
+    @wire(getObjectInfo, { objectApiName: "$objectApiName" })
+    handleObjectInfo({ data, error }) {
+        if (data) {
+            this.objectInfo = data;
+            console.log("ENHANCEDPATH-Object Info: ", this.objectInfo);
+            if (this.objectInfo.dependentFields) {
+                this.dependentFields = this.objectInfo.dependentFields[this.fieldApiName] || {};
+                console.log(
+                    `ENHANCEDPATH-Natively defined dependencies on ${this.fieldApiName} (including nested dependencies):`,
+                    this.dependentFields
+                );
+            }
+        } else if (error) {
+            this._logErrorNoToast(`Error getting object info for ${this.objectApiName}`, error);
+        }
+    }
+
     @wire(getRecord, {
         recordId: "$recordId",
         fields: "$fields"
@@ -57,7 +74,9 @@ export default class EnhancedPath extends LightningElement {
                 this.selectedLabel = data.fields[this.fieldApiName].displayValue;
             }
             this.recordTypeId = data.recordTypeId;
-            this.recordTypeName = data.recordTypeInfo ? data.recordTypeInfo.name : "__MASTER__";
+            this.recordTypeName = data.recordTypeInfo
+                ? data.fields["RecordType"]?.value?.fields["DeveloperName"]?.value
+                : "__MASTER__";
             this.preventOverwriteSelectedValue = false;
         } else if (error) {
             this._logErrorNoToast("Error handling wired record data", error);
@@ -75,23 +94,6 @@ export default class EnhancedPath extends LightningElement {
             this.pathSteps = data;
         } else if (error) {
             this._logErrorNoToast("Error handling wired PathAssistant metadata steps", error);
-        }
-    }
-
-    @wire(getObjectInfo, { objectApiName: "$objectApiName" })
-    handleObjectInfo({ data, error }) {
-        if (data) {
-            this.objectInfo = data;
-            console.log("ENHANCEDPATH-Object Info: ", this.objectInfo);
-            if (this.objectInfo.dependentFields) {
-                this.dependentFields = this.objectInfo.dependentFields[this.fieldApiName] || {};
-                console.log(
-                    `ENHANCEDPATH-Natively defined dependencies on ${this.fieldApiName} (including nested dependencies):`,
-                    this.dependentFields
-                );
-            }
-        } else if (error) {
-            this._logErrorNoToast(`Error getting object info for ${this.objectApiName}`, error);
         }
     }
 
@@ -135,7 +137,9 @@ export default class EnhancedPath extends LightningElement {
     }
 
     get fields() {
-        return [this.computedFieldApiName];
+        return Object.values(this.objectInfo.recordTypeInfos).filter((recordType) => !recordType.master).length > 0
+            ? [this.computedFieldApiName, `${this.objectApiName}.RecordType.DeveloperName`]
+            : [this.computedFieldApiName];
     }
 
     get fieldLabel() {
