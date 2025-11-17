@@ -12,11 +12,12 @@ public with sharing class EnhancedPathController {
         String objectApiName,
         String fieldApiName
     ) {
-        for (FlowDefinitionView flow : [
+        List<FlowDefinitionView> activeFlows = [
             SELECT Id, ApiName
             FROM FlowDefinitionView
             WHERE IsActive = TRUE AND ProcessType IN ('Flow', 'Appointments')
-        ]) {
+        ];
+        for (FlowDefinitionView flow : activeFlows) {
             VALID_FLOW_IDS_BY_API_NAME.put(flow.ApiName, flow.Id);
         }
         List<PathAssistant__c> pathAssistants = [
