@@ -13,7 +13,7 @@ Aims to replicate and further extend the functionality of the SF native Path com
 3. Can define additional dependent fields for X picklist value using `PathAssistantStep__c` records
 4. Can define a flow to launch when a user attempts to change to X pickist value using `PathAssistantStep__c` records, allowing for pre-commit validation
 
-![demo](https://i.postimg.cc/pT616MKJ/chrome-BBbh-LZYu8b.gif)
+![demo](https://lh3.googleusercontent.com/d/1SaWH8cJyeASTo1vnya67pp7wDEX1ObaH)
 
 ## Setup Information
 
