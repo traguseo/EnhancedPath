@@ -40,4 +40,9 @@ I have a "router" flow for each object where I use the Enhanced Path component. 
 
 In that router flow I then get the full record based on the `recordId` passed in, then make decisions based on things like `Record Type`, `newValue`, and `oldValue` to determine what subflow a user should be passed to when attempting to update X field on Y object to Z value. I'll then typically pass the full record around to the subflows to prevent further queries. At the end of the router flow and/or subflow I include an update node to set the picklist value to the `newValue` as the LWC will not update the picklist after passing off to a flow.
 
+## Upcoming Features
 
+1. Allow users to hide Key Fields and Guidance for Success, controllable via a property on the LWC
+2. Group `Closed` picklist values together
+3. [Nebula Logger](https://github.com/jongpie/NebulaLogger) detection and usage
+4. Confetti on field update
