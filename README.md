@@ -1,25 +1,29 @@
 # Enhanced Path
 
-[Install In Production](https://login.salesforce.com/packaging/installPackage.apexp?p0=04tgL000000CCBtQAO)
+[Install In Production](https://login.salesforce.com/packaging/installPackage.apexp?p0=04tgL000000CE8rQAG)
 
-[Install In Sandbox](https://test.salesforce.com/packaging/installPackage.apexp?p0=04tgL000000CCBtQAO)
+[Install In Sandbox](https://test.salesforce.com/packaging/installPackage.apexp?p0=04tgL000000CE8rQAG)
 
 ## Details
 
 Aims to replicate and further extend the functionality of the SF native Path component. Features:
 
-1. Syncs Key Fields and Guidance for Success from native SF Path Settings using the Metadata API
-2. Dynamically resolves infinite levels of nested dependent picklist fields using LDS
-3. Allows the admin to choose if users can hide/collapse the Key Field and Guidance for Success panel during configuration on the Lightning Record Page/Flexipage
-4. Can define additional dependent fields for X picklist value using the `DependentFieldNames__c` field on `PathAssistantStep__c` records
-5. Can define a flow to launch when a user attempts to change to X pickist value using the `RunFlow__c` and `FlowApiName__c` fields on `PathAssistantStep__c` records, allowing for pre-commit validation
-6. Can show confetti on successful update to X picklist value using the `ShowConfetti__c` field on `PathAssistantStep__c` records
-7. Can group picklist values together to show as the last step on the path using the `IsGrouped__c` field on `PathAssistantStep__c` records and define if they are considered "lost" (causing them to render as red on the path instead of green) using the `IsLost__c` field
-8. Detects [Nebula Logger](https://github.com/jongpie/NebulaLogger/tree/main) and logs errors using it if present
+1. Works with any picklist field on any object and any record type
+2. Syncs Key Fields and Guidance for Success from native SF Path Settings using the Metadata API
+3. Dynamically resolves infinite levels of nested dependent picklist fields using LDS
+4. Allows the admin to choose if users can hide/collapse the Key Field and Guidance for Success panel during configuration on the Lightning Record Page/Flexipage
+5. Allows the admin to prevent backwards movement of the picklist field during configuration on the Lightning Record Page/Flexipage
+6. Can define additional dependent fields for X picklist value using the `DependentFieldNames__c` field on `PathAssistantStep__c` records
+7. Can define a flow to launch when a user attempts to change to X pickist value using the `RunFlow__c` and `FlowApiName__c` fields on `PathAssistantStep__c` records, allowing for pre-commit validation
+8. Can show confetti on successful update to X picklist value using the `ShowConfetti__c` field on `PathAssistantStep__c` records
+9. Can group picklist values together to show as the last step on the path using the `IsGrouped__c` field on `PathAssistantStep__c` records and define if they are considered "lost" (causing them to render as red on the path instead of green) using the `IsLost__c` field
+10. Detects [Nebula Logger](https://github.com/jongpie/NebulaLogger/tree/main) and logs errors using it if present
 
 ![demo](https://lh3.googleusercontent.com/d/1SaWH8cJyeASTo1vnya67pp7wDEX1ObaH)
 
 ## Setup Information
+
+**Video guide coming Soon™**
 
 1. After installing, schedule the `ScheduleQueueableSyncPathAssistants` job (I use every hour, but you could do whatever makes sense for your Org)
 2. Run the `QueueableSyncPathAssistants` job once manually (or wait for your scheduled job to run) to sync all existing Path Settings to the `PathAssitant__c` and `PathAssistantStep__c` objects (anon apex snippet: `System.enqueueJob(new QueueableSyncPathAssistants())`)

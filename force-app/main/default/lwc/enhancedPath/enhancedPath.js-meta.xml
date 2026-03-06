@@ -23,6 +23,7 @@
             />
             <property name="groupingLabel" type="String" label="Grouping Label" description="Label to group picklist values under" default="Closed" required="true"/>
             <property name="allowHideKeyFieldsAndGuidance" type="Boolean" label="Allow Users To Collapse Key Fields and Guidance" description="Allow users to collapse the key fields and guidance panel" default="false"/>
+            <property name="preventBackwardsMovement" type="Boolean" label="Prevent Backwards Movement" description="Prevent users from moving the path backwards" default="false"/>
         </targetConfig>
     </targetConfigs>
 </LightningComponentBundle>

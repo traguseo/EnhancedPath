@@ -20,6 +20,7 @@ export default class EnhancedPath extends LightningElement {
     @api fieldApiName;
     @api allowHideKeyFieldsAndGuidance;
     @api groupingLabel;
+    @api preventBackwardsMovement;
     hasGroupedValues = false;
     bypassGroupedSelection = false;
     groupingBackendValue = "enhancedpathgrouping";
@@ -38,6 +39,7 @@ export default class EnhancedPath extends LightningElement {
     selectedValue = "";
     currentValue = "";
     selectedLabel = "";
+    currentLabel = "";
     objectInfo = {};
     nebulaLoggerType = "Not Present";
     isConfettiLoaded = false;
@@ -130,9 +132,10 @@ export default class EnhancedPath extends LightningElement {
         if (data) {
             console.log("ENHANCEDPATH-Current Record Data: ", data);
             this.currentValue = data.fields[this.fieldApiName].value;
+            this.currentLabel = data.fields[this.fieldApiName].displayValue;
             if (!this.preventOverwriteSelectedValue) {
                 this.selectedValue = this.currentValue;
-                this.selectedLabel = data.fields[this.fieldApiName].displayValue;
+                this.selectedLabel = this.currentLabel;
             }
             this.recordTypeId = data.recordTypeId;
             this.recordTypeName = data.recordTypeInfo
@@ -231,7 +234,7 @@ export default class EnhancedPath extends LightningElement {
     get buttonLabel() {
         return this.selectedValue === this.groupingBackendValue
             ? `Select ${this.groupingLabel} ${this.fieldLabel}`
-            : this.currentValue && this.selectedValuePathStep?.isGrouped
+            : this.selectedValuePathStep?.isGrouped
               ? `Change ${this.groupingLabel} ${this.fieldLabel}`
               : this.selectedValue === this.currentValue
                 ? `Mark ${this.fieldLabel} as Complete`
@@ -355,6 +358,24 @@ export default class EnhancedPath extends LightningElement {
                 this.selectedLabel = this.picklistValues[currentIndex + 1].label;
             }
         }
+        if (this.preventBackwardsMovement) {
+            console.log(
+                `ENHANCEDPATH-Backwards movement prevention is enabled, checking indices of current (${this.currentValue}) and selected values (${this.selectedValue}) to enforce...`
+            );
+            const currentIndex = this.picklistValues.findIndex((step) => step.value === this.currentValue);
+            const selectedIndex = this.picklistValues.findIndex((step) => step.value === this.selectedValue);
+            console.log(`ENHANCEDPATH-Current value index: ${currentIndex}, Selected value index: ${selectedIndex}`);
+            if (selectedIndex > -1 && selectedIndex < currentIndex) {
+                this._sendToast(
+                    "Invalid Action",
+                    `Backwards movement is not allowed on this path. Please select a ${this.fieldLabel} ahead of ${this.currentLabel}.`,
+                    "error",
+                    "sticky"
+                );
+                this.isSaving = false;
+                return;
+            }
+        }
         if (
             (this.selectedValue === this.groupingBackendValue || this.selectedValuePathStep?.isGrouped) &&
             !this.bypassGroupedSelection
@@ -447,7 +468,9 @@ export default class EnhancedPath extends LightningElement {
                 groupLabel: this.groupingLabel
             });
         } else {
-            console.log("ENHANCEDPATH-No flow or dependent fields required, saving directly.");
+            console.log(
+                "ENHANCEDPATH-No grouped value selected, flow to run, or dependent fields required, saving directly."
+            );
             this.handleSaveFromButton();
         }
         this.bypassGroupedSelection = false;
@@ -461,6 +484,7 @@ export default class EnhancedPath extends LightningElement {
         updateRecord({ fields })
             .then(() => {
                 this.currentValue = this.selectedValue;
+                this.currentLabel = this.selectedLabel;
                 this._sendToast(
                     "Success",
                     `${this.fieldLabel} successfully updated to ${this.selectedLabel}!`,
@@ -514,7 +538,7 @@ export default class EnhancedPath extends LightningElement {
     }
 
     _openModal(config) {
-        console.log("ENHANCEDPATH-Opening modal for flow or dependent fields.");
+        console.log("ENHANCEDPATH-Opening modal for grouped value selection, flow, or dependent fields.");
         modal
             .open(config)
             .then((result) => {
@@ -532,6 +556,7 @@ export default class EnhancedPath extends LightningElement {
                         "success"
                     );
                     this.currentValue = this.selectedValue;
+                    this.currentLabel = this.selectedLabel;
                     this._showConfettiIfRelevant();
                 } else if (result.enhancedPathStatus === "error") {
                     this._logErrorAndToast(
@@ -659,10 +684,6 @@ export default class EnhancedPath extends LightningElement {
         Object.keys(result).forEach((key) => {
             result[key] = Array.from(result[key]);
         });
-        console.log(
-            "ENHANCEDPATH-Resolved field dependencies by picklist value (including custom defined dependencies):",
-            result
-        );
         return result;
     }
 
@@ -715,9 +736,6 @@ export default class EnhancedPath extends LightningElement {
             if (currentValuePathStep?.isGrouped && currentValuePathStep?.isLost) {
                 classes += " slds-is-incomplete";
                 isIncomplete = true;
-            } else if (currentValuePathStep?.isGrouped && currentValuePathStep?.isLost) {
-                classes += " slds-is-complete";
-                isComplete = true;
             } else {
                 classes += " slds-is-complete";
                 isComplete = true;
