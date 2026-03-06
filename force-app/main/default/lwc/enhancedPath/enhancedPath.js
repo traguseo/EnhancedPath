@@ -380,6 +380,8 @@ export default class EnhancedPath extends LightningElement {
                 );
                 this.isSaving = false;
                 this.bypassGroupedSelection = false;
+                this.selectedValue = this.currentValue;
+                this.selectedLabel = this.currentLabel;
                 return;
             }
         }
