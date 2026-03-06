@@ -27,8 +27,6 @@ export default class EnhancedPath extends LightningElement {
     hideGuidancePanel = false;
     pathSteps = [];
     isSaving = false;
-    showFlow = false;
-    showDependentFields = false;
     disablePath = false;
     preventOverwriteSelectedValue = false;
     rerenderKeyFields = false;
@@ -277,6 +275,14 @@ export default class EnhancedPath extends LightningElement {
         return this.disablePath ? "path-disabled" : "";
     }
 
+    get showCollapseButton() {
+        return (
+            this.allowHideKeyFieldsAndGuidance &&
+            this.selectedValuePathStep &&
+            (this.selectedValuePathStep.guidance || this.selectedValuePathStep.keyFields.length > 0)
+        );
+    }
+
     get showCoachingPanel() {
         return (
             this.selectedValuePathStep &&
@@ -461,6 +467,7 @@ export default class EnhancedPath extends LightningElement {
                 fieldApiName: this.fieldApiName,
                 fieldLabel: this.fieldLabel,
                 dependentFields: this.selectedValueDependentFields,
+                optionalFields: this.selectedValuePathStep?.optionalFields,
                 selectedLabel: this.selectedLabel,
                 selectedValue: this.selectedValue,
                 showDependentFields: true,

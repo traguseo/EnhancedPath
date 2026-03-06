@@ -19,6 +19,7 @@ private class EnhancedPathControllerTest {
             PicklistValue__c = 'New',
             KeyFieldNames__c = 'Company,LastName',
             DependentFieldNames__c = 'Email,MobilePhone',
+            OptionalFieldNames__c = 'FirstName',
             RunFlow__c = true,
             FlowApiName__c = 'Test',
             PathAssistant__r = new PathAssistant__c(ExternalId__c = 'Lead_Status___MASTER__'),

@@ -15,6 +15,7 @@ export default class EnhancedPathModal extends LightningModal {
     @api flowApiName;
     @api flowInputVariables;
     @api dependentFields;
+    @api optionalFields;
     @api selectedLabel;
     @api selectedValue;
     @api showDependentFields = false;
@@ -30,6 +31,10 @@ export default class EnhancedPathModal extends LightningModal {
 
     get disableConfirmSelectionButton() {
         return this.isLoading || !this.selectedGroupedValue;
+    }
+
+    get editFormColumnSize() {
+        return this.optionalFields?.length > 0 ? 6 : 12;
     }
 
     handleFormLoaded(event) {

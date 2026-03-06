@@ -1,8 +1,8 @@
 # Enhanced Path
 
-[Install In Production](https://login.salesforce.com/packaging/installPackage.apexp?p0=04tgL000000CE8rQAG)
+[Install In Production](https://login.salesforce.com/packaging/installPackage.apexp?p0=04tgL000000CELlQAO)
 
-[Install In Sandbox](https://test.salesforce.com/packaging/installPackage.apexp?p0=04tgL000000CE8rQAG)
+[Install In Sandbox](https://test.salesforce.com/packaging/installPackage.apexp?p0=04tgL000000CELlQAO)
 
 ## Details
 
@@ -13,7 +13,7 @@ Aims to replicate and further extend the functionality of the SF native Path com
 3. Dynamically resolves infinite levels of nested dependent picklist fields using LDS
 4. Allows the admin to choose if users can hide/collapse the Key Field and Guidance for Success panel during configuration on the Lightning Record Page/Flexipage
 5. Allows the admin to prevent backwards movement of the picklist field during configuration on the Lightning Record Page/Flexipage
-6. Can define additional dependent fields for X picklist value using the `DependentFieldNames__c` field on `PathAssistantStep__c` records
+6. Can define additional requried depdendent fields for X picklist value using the `DependentFieldNames__c` field, as well as optional fields using the `OptionalFieldNames__c` field on `PathAssistantStep__c` records
 7. Can define a flow to launch when a user attempts to change to X pickist value using the `RunFlow__c` and `FlowApiName__c` fields on `PathAssistantStep__c` records, allowing for pre-commit validation
 8. Can show confetti on successful update to X picklist value using the `ShowConfetti__c` field on `PathAssistantStep__c` records
 9. Can group picklist values together to show as the last step on the path using the `IsGrouped__c` field on `PathAssistantStep__c` records and define if they are considered "lost" (causing them to render as red on the path instead of green) using the `IsLost__c` field
@@ -28,7 +28,7 @@ Aims to replicate and further extend the functionality of the SF native Path com
 1. After installing, schedule the `ScheduleQueueableSyncPathAssistants` job (I use every hour, but you could do whatever makes sense for your Org)
 2. Run the `QueueableSyncPathAssistants` job once manually (or wait for your scheduled job to run) to sync all existing Path Settings to the `PathAssitant__c` and `PathAssistantStep__c` objects (anon apex snippet: `System.enqueueJob(new QueueableSyncPathAssistants())`)
 3. Assign the included `Enhanced Path Admin` and `Enhanced Path User` permission sets out to relevant users
-4. Create or update any `PathAssistant__c` and `PathAssistantStep__c` records to configure any additional functionality for desired object + record type + picklist field cominbations. Additonal functionality includes: requiring dependent fields other than picklists or running a flow
+4. Create or update any `PathAssistant__c` and `PathAssistantStep__c` records to configure any additional functionality for desired object + record type + picklist field combinations
 
 `PathAssistant__c` records have an external id field which is used for querying and upserting, the expected format is: `ObjectAPIName_FieldAPIName_RecordTypeName` (so for example, `Lead_Status___MASTER__`)
 
@@ -50,6 +50,6 @@ I have a "router" flow for each object where I use the Enhanced Path component. 
 
 In that router flow I then get the full record based on the `recordId` passed in, then make decisions based on things like `Record Type`, `newValue`, and `oldValue` to determine what subflow a user should be passed to when attempting to update X field on Y object to Z value. I'll then typically pass the full record around to the subflows to prevent further queries. At the end of the router flow and/or subflow I include an update node to set the picklist value to the `newValue` as the LWC will not update the picklist after passing off to a flow.
 
-## Planned Features
+## Feature Requests Are Welcome!
 
-1. Define optional fields using a new field on `PathAssistantStep__c` records and show them on the dependent fields modal
+Feel free to submit any feature requests or bug reports as issues on the repo, or if you're interested in contributing code, submit a PR! I built this for my own use but am happy to share it with the community and make improvements as needed.

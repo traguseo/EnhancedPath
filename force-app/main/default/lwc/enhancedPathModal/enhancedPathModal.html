@@ -13,11 +13,7 @@
                 </template>
                 <!-- Dependent Fields -->
                 <template lwc:if={showDependentFields}>
-                    <lightning-layout-item
-                        size="12"
-                        flexibility="grow"
-                        class="slds-p-left_medium slds-p-right_medium slds-scrollable-y"
-                    >
+                    <lightning-layout-item size="12" flexibility="grow" class="slds-p-left_medium slds-p-right_medium">
                         <h2 class="slds-text-heading_small slds-p-bottom_small slds-p-top_x-small slds-text-title_bold">
                             Moving the {fieldLabel} to {selectedLabel} requires dependent fields to be filled out!
                         </h2>
@@ -28,19 +24,33 @@
                             onsubmit={handleRecordFormSubmit}
                             onload={handleFormLoaded}
                         >
-                            <lightning-input-field
-                                field-name={fieldApiName}
-                                value={selectedValue}
-                                required="true"
-                                disabled="true"
-                            ></lightning-input-field>
-                            <template for:each={dependentFields} for:item="dependentField">
-                                <lightning-input-field
-                                    field-name={dependentField}
-                                    key={dependentField}
-                                    required="true"
-                                ></lightning-input-field>
-                            </template>
+                            <lightning-layout>
+                                <lightning-layout-item size={editFormColumnSize}>
+                                    <lightning-input-field
+                                        field-name={fieldApiName}
+                                        value={selectedValue}
+                                        required="true"
+                                        disabled="true"
+                                    ></lightning-input-field>
+                                    <template for:each={dependentFields} for:item="dependentField">
+                                        <lightning-input-field
+                                            field-name={dependentField}
+                                            key={dependentField}
+                                            required="true"
+                                        ></lightning-input-field>
+                                    </template>
+                                </lightning-layout-item>
+                                <template lwc:if={optionalFields.length}>
+                                    <lightning-layout-item size={editFormColumnSize}>
+                                        <template for:each={optionalFields} for:item="optionalField">
+                                            <lightning-input-field
+                                                field-name={optionalField}
+                                                key={optionalField}
+                                            ></lightning-input-field>
+                                        </template>
+                                    </lightning-layout-item>
+                                </template>
+                            </lightning-layout>
                             <lightning-button
                                 type="submit"
                                 label="Save"
@@ -52,11 +62,7 @@
                     </lightning-layout-item>
                 </template>
                 <template lwc:elseif={showFlow}>
-                    <lightning-layout-item
-                        size="12"
-                        flexibility="grow"
-                        class="slds-p-left_medium slds-p-right_medium slds-scrollable-y"
-                    >
+                    <lightning-layout-item size="12" flexibility="grow" class="slds-p-left_medium slds-p-right_medium">
                         <h2 class="slds-text-heading_small slds-p-bottom_small slds-p-top_x-small slds-text-title_bold">
                             Moving the {fieldLabel} to {selectedLabel} requires additional steps!
                         </h2>

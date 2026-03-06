@@ -39,6 +39,7 @@ public with sharing class EnhancedPathController {
                         RunFlow__c,
                         FlowApiName__c,
                         DependentFieldNames__c,
+                        OptionalFieldNames__c,
                         IsGrouped__c,
                         IsLost__c,
                         ShowConfetti__c
@@ -61,11 +62,15 @@ public with sharing class EnhancedPathController {
                 for (PathAssistantStep__c step : pathAssistant.PathAssistantSteps__r) {
                     List<String> keyFields = new List<String>();
                     List<String> dependentFields = new List<String>();
+                    List<String> optionalFields = new List<String>();
                     if (String.isNotBlank(step.KeyFieldNames__c)) {
                         keyFields = step.KeyFieldNames__c.split(',');
                     }
                     if (String.isNotBlank(step.DependentFieldNames__c)) {
                         dependentFields = step.DependentFieldNames__c.split(',');
+                    }
+                    if (String.isNotBlank(step.OptionalFieldNames__c)) {
+                        optionalFields.addAll(step.OptionalFieldNames__c.split(','));
                     }
                     if (step.RunFlow__c == true && String.isNotBlank(step.FlowApiName__c)) {
                         step.FlowApiName__c = VALID_FLOW_IDS_BY_API_NAME.containsKey(step.FlowApiName__c)
@@ -81,6 +86,7 @@ public with sharing class EnhancedPathController {
                             step.FlowApiName__c,
                             step.FlowApiName__c != null ? true : false,
                             dependentFields,
+                            optionalFields,
                             step.IsGrouped__c,
                             step.IsLost__c,
                             step.ShowConfetti__c
@@ -143,6 +149,8 @@ public with sharing class EnhancedPathController {
         @AuraEnabled
         public List<String> dependentFields;
         @AuraEnabled
+        public List<String> optionalFields;
+        @AuraEnabled
         public Boolean isGrouped;
         @AuraEnabled
         public Boolean isLost;
@@ -156,6 +164,7 @@ public with sharing class EnhancedPathController {
             String flowApiName,
             Boolean flowValid,
             List<String> dependentFields,
+            List<String> optionalFields,
             Boolean isGrouped,
             Boolean isLost,
             Boolean showConfetti
@@ -167,6 +176,7 @@ public with sharing class EnhancedPathController {
             this.flowApiName = flowApiName;
             this.flowValid = flowValid;
             this.dependentFields = dependentFields;
+            this.optionalFields = optionalFields;
             this.isGrouped = isGrouped;
             this.isLost = isLost;
             this.showConfetti = showConfetti;
