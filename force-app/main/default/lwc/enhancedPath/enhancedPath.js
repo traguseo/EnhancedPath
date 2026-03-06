@@ -445,7 +445,10 @@ export default class EnhancedPath extends LightningElement {
                 this.isSaving = false;
                 this.disablePath = false;
             }
-        } else if (this.selectedValueDependentFields?.length > 0) {
+        } else if (
+            this.selectedValueDependentFields?.length > 0 ||
+            this.selectedValuePathStep?.optionalFields?.length > 0
+        ) {
             this._sendToast(
                 "Action Required",
                 `Moving the ${this.fieldLabel} to ${this.selectedLabel} requires additional steps!`,

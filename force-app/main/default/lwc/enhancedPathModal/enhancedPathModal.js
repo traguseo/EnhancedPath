@@ -33,8 +33,8 @@ export default class EnhancedPathModal extends LightningModal {
         return this.isLoading || !this.selectedGroupedValue;
     }
 
-    get editFormColumnSize() {
-        return this.optionalFields?.length > 0 ? 6 : 12;
+    get editFormLargeDeviceColumnSize() {
+        return this.optionalFields?.length > 0 && this.dependentFields?.length > 0 ? 6 : 12;
     }
 
     handleFormLoaded(event) {

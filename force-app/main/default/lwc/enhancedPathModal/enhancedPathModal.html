@@ -24,24 +24,26 @@
                             onsubmit={handleRecordFormSubmit}
                             onload={handleFormLoaded}
                         >
-                            <lightning-layout>
-                                <lightning-layout-item size={editFormColumnSize}>
+                            <lightning-layout multiple-rows="true">
+                                <lightning-layout-item size="12" large-device-size={editFormLargeDeviceColumnSize}>
                                     <lightning-input-field
                                         field-name={fieldApiName}
                                         value={selectedValue}
                                         required="true"
                                         disabled="true"
                                     ></lightning-input-field>
-                                    <template for:each={dependentFields} for:item="dependentField">
-                                        <lightning-input-field
-                                            field-name={dependentField}
-                                            key={dependentField}
-                                            required="true"
-                                        ></lightning-input-field>
+                                    <template lwc:if={dependentFields.length}>
+                                        <template for:each={dependentFields} for:item="dependentField">
+                                            <lightning-input-field
+                                                field-name={dependentField}
+                                                key={dependentField}
+                                                required="true"
+                                            ></lightning-input-field>
+                                        </template>
                                     </template>
                                 </lightning-layout-item>
                                 <template lwc:if={optionalFields.length}>
-                                    <lightning-layout-item size={editFormColumnSize}>
+                                    <lightning-layout-item size="12" large-device-size={editFormLargeDeviceColumnSize}>
                                         <template for:each={optionalFields} for:item="optionalField">
                                             <lightning-input-field
                                                 field-name={optionalField}
