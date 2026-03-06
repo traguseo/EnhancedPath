@@ -34,11 +34,6 @@
     flex-grow: 1;
 }
 
-.button-layout-item {
-    flex-grow: 0;
-    flex-shrink: 0;
-}
-
 .path-disabled {
     pointer-events: none;
     opacity: 0.6;

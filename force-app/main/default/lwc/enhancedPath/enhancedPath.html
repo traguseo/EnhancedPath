@@ -10,7 +10,21 @@
         </template>
         <!-- Path Bar -->
         <template lwc:if={displayedStepsWithClass}>
-            <lightning-layout multiple-rows="true">
+            <lightning-layout multiple-rows>
+                <template lwc:if={allowHideKeyFieldsAndGuidance}>
+                    <lightning-layout-item
+                        flexibility="shrink"
+                        class="slds-align_absolute-center slds-p-left_small slds-show_medium"
+                    >
+                        <lightning-button-icon
+                            icon-name={chevronIcon}
+                            size="small"
+                            variant="container"
+                            class={chevronClass}
+                            onclick={handleToggleGuidancePanel}
+                        ></lightning-button-icon>
+                    </lightning-layout-item>
+                </template>
                 <lightning-layout-item flexibility="grow" class="slds-p-left_small slds-p-right_small path-layout-item">
                     <div class="path-scroller scrollable-path">
                         <div class={pathDisabledClass}>
@@ -51,7 +65,7 @@
                 <!-- Button for Desktop -->
                 <lightning-layout-item
                     flexibility="shrink"
-                    class="slds-p-right_small slds-align_absolute-center slds-show_medium button-layout-item"
+                    class="slds-p-right_small slds-align_absolute-center slds-show_medium"
                 >
                     <lightning-button
                         variant="brand"
@@ -69,11 +83,11 @@
                 >
                     <strong>Selected {fieldLabel}:</strong> {selectedLabel}
                 </lightning-layout-item>
-                <!-- Button for Tablet/Mobile -->
+                <!-- Buttons for Tablet/Mobile -->
                 <lightning-layout-item
                     size="12"
-                    flexibility="shrink"
-                    class="slds-p-bottom_x-small slds-align_absolute-center slds-hide_medium button-layout-item"
+                    flexibility="grow"
+                    class="slds-p-bottom_x-small slds-hide_medium slds-p-left_small slds-p-right_small"
                 >
                     <lightning-button
                         variant="brand"
@@ -81,8 +95,23 @@
                         onclick={handleMarkComplete}
                         disabled={disableCompleteButton}
                         icon-name={completeButtonIconName}
+                        stretch
                     ></lightning-button>
                 </lightning-layout-item>
+                <template lwc:if={allowHideKeyFieldsAndGuidance}>
+                    <lightning-layout-item
+                        size="12"
+                        flexibility="grow"
+                        class="slds-p-bottom_x-small slds-hide_medium slds-p-left_small slds-p-right_small"
+                    >
+                        <lightning-button
+                            variant="neutral"
+                            label={collapseButtonLabel}
+                            onclick={handleToggleGuidancePanel}
+                            stretch
+                        ></lightning-button>
+                    </lightning-layout-item>
+                </template>
             </lightning-layout>
             <!-- Coaching Panel -->
             <template lwc:if={showCoachingPanel}>

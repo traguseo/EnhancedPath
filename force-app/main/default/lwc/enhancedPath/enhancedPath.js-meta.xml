@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <LightningComponentBundle xmlns="http://soap.sforce.com/2006/04/metadata">
-    <apiVersion>64.0</apiVersion>
+    <apiVersion>66.0</apiVersion>
     <description>Enhanced Path</description>
     <isExposed>true</isExposed>
     <masterLabel>Enhanced Path</masterLabel>
@@ -21,6 +21,8 @@
                     required="true"
                     default="Status"
             />
+            <property name="groupingLabel" type="String" label="Grouping Label" description="Label to group picklist values under" default="Closed" required="true"/>
+            <property name="allowHideKeyFieldsAndGuidance" type="Boolean" label="Allow Users To Collapse Key Fields and Guidance" description="Allow users to collapse the key fields and guidance panel" default="false"/>
         </targetConfig>
     </targetConfigs>
 </LightningComponentBundle>

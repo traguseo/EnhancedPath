@@ -4,6 +4,10 @@
         <apexClass>EnhancedPathController</apexClass>
         <enabled>true</enabled>
     </classAccesses>
+    <classAccesses>
+        <apexClass>MockEnhancedPathCallable</apexClass>
+        <enabled>true</enabled>
+    </classAccesses>
     <description>Grants users read access to the PathAssistant__c and PathAssisantStep__c objects. Also grants access to theapex classes needed to use the enhancedPath LWC</description>
     <fieldPermissions>
         <editable>false</editable>

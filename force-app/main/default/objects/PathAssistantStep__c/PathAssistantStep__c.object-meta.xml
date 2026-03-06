@@ -162,7 +162,7 @@ Records can be created manually, but are also maintained via a scheduled job tha
         <label>Path Assistant Step</label>
         <type>Text</type>
     </nameField>
-    <pluralLabel>Path Assistant Step</pluralLabel>
+    <pluralLabel>Path Assistant Steps</pluralLabel>
     <searchLayouts>
         <searchResultsAdditionalFields>PathAssistant__c</searchResultsAdditionalFields>
         <searchResultsAdditionalFields>PicklistValue__c</searchResultsAdditionalFields>

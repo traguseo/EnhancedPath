@@ -162,7 +162,7 @@ Records can be created manually, but are also maintained via a scheduled job tha
         <label>Path Assistant</label>
         <type>Text</type>
     </nameField>
-    <pluralLabel>Path Assistant</pluralLabel>
+    <pluralLabel>Path Assistants</pluralLabel>
     <searchLayouts>
         <searchResultsAdditionalFields>IsActive__c</searchResultsAdditionalFields>
         <searchResultsAdditionalFields>ObjectApiName__c</searchResultsAdditionalFields>

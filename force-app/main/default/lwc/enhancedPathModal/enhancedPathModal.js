@@ -19,7 +19,18 @@ export default class EnhancedPathModal extends LightningModal {
     @api selectedValue;
     @api showDependentFields = false;
     @api showFlow = false;
+    @api groupLabel;
+    @api groupedValues = [];
     isLoading = true;
+    selectedGroupedValue;
+
+    get picklistFieldLabel() {
+        return `Select a ${this.groupLabel} ${this.fieldLabel}:`;
+    }
+
+    get disableConfirmSelectionButton() {
+        return this.isLoading || !this.selectedGroupedValue;
+    }
 
     handleFormLoaded(event) {
         this.isLoading = false;
@@ -69,5 +80,21 @@ export default class EnhancedPathModal extends LightningModal {
                 this.disableClose = false;
                 this.close({ enhancedPathStatus: "error", error: error });
             });
+    }
+
+    handleGroupedValueChange(event) {
+        this.selectedGroupedValue = event.detail.value;
+    }
+
+    handleGroupingFormSubmit(event) {
+        event.preventDefault();
+        this.disableClose = false;
+        this.isLoading = true;
+        console.log("ENHANCEDPATH-Submitting grouping selection: ", this.selectedGroupedValue);
+        this.close({
+            enhancedPathStatus: "groupingSelected",
+            groupingValue: this.selectedGroupedValue,
+            groupingLabel: this.groupedValues.find((option) => option.value === this.selectedGroupedValue)?.label
+        });
     }
 }

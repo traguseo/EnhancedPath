@@ -38,7 +38,10 @@ public with sharing class EnhancedPathController {
                         ExternalId__c,
                         RunFlow__c,
                         FlowApiName__c,
-                        DependentFieldNames__c
+                        DependentFieldNames__c,
+                        IsGrouped__c,
+                        IsLost__c,
+                        ShowConfetti__c
                     FROM PathAssistantSteps__r
                 )
             FROM PathAssistant__c
@@ -77,7 +80,10 @@ public with sharing class EnhancedPathController {
                             step.RunFlow__c,
                             step.FlowApiName__c,
                             step.FlowApiName__c != null ? true : false,
-                            dependentFields
+                            dependentFields,
+                            step.IsGrouped__c,
+                            step.IsLost__c,
+                            step.ShowConfetti__c
                         )
                     );
                 }
@@ -86,6 +92,41 @@ public with sharing class EnhancedPathController {
         return steps;
     }
 
+    @AuraEnabled
+    public static String detectNebulaLoggerType() {
+        System.Callable unlockedNebulaLogger = (System.Callable) Type.forName('CallableLogger')?.newInstance();
+        System.Callable lockedNebulaLogger = (System.Callable) Type.forName('Nebula.CallableLogger')?.newInstance();
+        String nebulaLoggerType = unlockedNebulaLogger != null
+            ? 'CallableLogger'
+            : lockedNebulaLogger != null ? 'Nebula.CallableLogger' : 'Not Present';
+        return nebulaLoggerType;
+    }
+
+    @AuraEnabled
+    public static Boolean createAndSaveLogEntry(String nebulaLoggerType, Map<String, Object> input) {
+        System.Callable dynamicLogger = (System.Callable) Type.forName(
+                nebulaLoggerType == 'Not Present' ? 'MockEnhancedPathCallable' : nebulaLoggerType
+            )
+            ?.newInstance();
+        if (dynamicLogger == null) {
+            return false;
+        }
+        Map<String, Object> newEntryOutput = (Map<String, Object>) dynamicLogger.call('newEntry', input);
+        Boolean newEntrySuccess = (Boolean) newEntryOutput.get('isSuccess');
+        if (!newEntrySuccess) {
+            throw new AuraHandledException(
+                'Failed to create Nebula Logger log entry: ' + newEntryOutput.get('exceptionMessage')
+            );
+        }
+        Map<String, Object> saveLogOutput = (Map<String, Object>) dynamicLogger.call('saveLog', null);
+        Boolean saveLogSuccess = (Boolean) saveLogOutput.get('isSuccess');
+        if (!saveLogSuccess) {
+            throw new AuraHandledException(
+                'Failed to create Nebula Logger log entry: ' + saveLogOutput.get('exceptionMessage')
+            );
+        }
+        return true;
+    }
     public class PathStep {
         @AuraEnabled
         public String value;
@@ -101,6 +142,12 @@ public with sharing class EnhancedPathController {
         public Boolean flowValid;
         @AuraEnabled
         public List<String> dependentFields;
+        @AuraEnabled
+        public Boolean isGrouped;
+        @AuraEnabled
+        public Boolean isLost;
+        @AuraEnabled
+        public Boolean showConfetti;
         public PathStep(
             String value,
             String guidance,
@@ -108,7 +155,10 @@ public with sharing class EnhancedPathController {
             Boolean runFlow,
             String flowApiName,
             Boolean flowValid,
-            List<String> dependentFields
+            List<String> dependentFields,
+            Boolean isGrouped,
+            Boolean isLost,
+            Boolean showConfetti
         ) {
             this.value = value;
             this.guidance = guidance != null ? guidance : '';
@@ -117,6 +167,9 @@ public with sharing class EnhancedPathController {
             this.flowApiName = flowApiName;
             this.flowValid = flowValid;
             this.dependentFields = dependentFields;
+            this.isGrouped = isGrouped;
+            this.isLost = isLost;
+            this.showConfetti = showConfetti;
         }
     }
 }

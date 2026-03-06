@@ -86,4 +86,23 @@ private class EnhancedPathControllerTest {
         Test.stopTest();
         Assert.areEqual(0, steps.size(), 'Expected an empty list to be returned');
     }
+
+    @IsTest
+    static void shouldAttemptToCreateAndSaveLogEntry() {
+        Test.startTest();
+        String nebulaLoggerType = EnhancedPathController.detectNebulaLoggerType();
+        Map<String, Object> input = new Map<String, Object>{ 'loggingLevel' => 'ERROR', 'message' => 'Test' };
+        Boolean result = EnhancedPathController.createAndSaveLogEntry(nebulaLoggerType, input);
+        Test.stopTest();
+        Assert.isTrue(result, 'Expected createAndSaveLogEntry to return true');
+    }
+
+    @IsTest
+    static void handlesSomeBadValueForDetection() {
+        Test.startTest();
+        Map<String, Object> input = new Map<String, Object>{ 'loggingLevel' => 'ERROR', 'message' => 'Test' };
+        Boolean result = EnhancedPathController.createAndSaveLogEntry('SomeBadValue', input);
+        Test.stopTest();
+        Assert.isFalse(result, 'Expected createAndSaveLogEntry to return false with bad/unexpected logger type');
+    }
 }

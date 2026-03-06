@@ -13,7 +13,11 @@
                 </template>
                 <!-- Dependent Fields -->
                 <template lwc:if={showDependentFields}>
-                    <lightning-layout-item size="12" flexibility="grow" class="slds-p-left_medium slds-p-right_medium">
+                    <lightning-layout-item
+                        size="12"
+                        flexibility="grow"
+                        class="slds-p-left_medium slds-p-right_medium slds-scrollable-y"
+                    >
                         <h2 class="slds-text-heading_small slds-p-bottom_small slds-p-top_x-small slds-text-title_bold">
                             Moving the {fieldLabel} to {selectedLabel} requires dependent fields to be filled out!
                         </h2>
@@ -47,8 +51,12 @@
                         </lightning-record-edit-form>
                     </lightning-layout-item>
                 </template>
-                <template lwc:if={showFlow}>
-                    <lightning-layout-item size="12" flexibility="grow" class="slds-p-left_medium slds-p-right_medium">
+                <template lwc:elseif={showFlow}>
+                    <lightning-layout-item
+                        size="12"
+                        flexibility="grow"
+                        class="slds-p-left_medium slds-p-right_medium slds-scrollable-y"
+                    >
                         <h2 class="slds-text-heading_small slds-p-bottom_small slds-p-top_x-small slds-text-title_bold">
                             Moving the {fieldLabel} to {selectedLabel} requires additional steps!
                         </h2>
@@ -60,6 +68,37 @@
                             class="slds-p-around_medium"
                         >
                         </lightning-flow>
+                    </lightning-layout-item>
+                </template>
+                <template lwc:else>
+                    <lightning-layout-item size="12" flexibility="grow" class="slds-p-left_medium slds-p-right_medium">
+                        <h2 class="slds-text-heading_small slds-p-bottom_small slds-p-top_x-small slds-text-title_bold">
+                            Select a more specific {groupLabel} value for {fieldLabel} to proceed!
+                        </h2>
+                        <lightning-record-edit-form
+                            object-api-name={objectApiName}
+                            record-id={recordId}
+                            record-type-id={recordTypeId}
+                            onsubmit={handleGroupingFormSubmit}
+                            onload={handleFormLoaded}
+                        >
+                            <lightning-combobox
+                                name="picklistValueFromGrouping"
+                                label={picklistFieldLabel}
+                                placeholder="Select an option"
+                                options={groupedValues}
+                                value={selectedGroupedValue}
+                                onchange={handleGroupedValueChange}
+                                required="true"
+                            ></lightning-combobox>
+                            <lightning-button
+                                type="submit"
+                                label="Confirm Selection"
+                                variant="brand"
+                                class="slds-p-top_small slds-align_absolute-center"
+                                disabled={disableConfirmSelectionButton}
+                            ></lightning-button>
+                        </lightning-record-edit-form>
                     </lightning-layout-item>
                 </template>
             </lightning-layout>
