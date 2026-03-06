@@ -5,7 +5,7 @@
       "default": true,
       "package": "EnhancedPath",
       "versionName": "ver 1.1",
-      "versionNumber": "1.1.0.NEXT",
+      "versionNumber": "1.1.1.NEXT",
       "versionDescription": "v1.1 adds new features including picklist value grouping, ability to collapse the key fields/guidance panel, and confetti.",
       "releaseNotesUrl": "https://github.com/traguseo/EnhancedPath",
       "postInstallUrl": "https://github.com/traguseo/EnhancedPath"
@@ -27,6 +27,7 @@
     "EnhancedPath@0.1.0-8": "04tgL0000007xJVQAY",
     "EnhancedPath@0.1.0-9": "04tgL0000007xbFQAQ",
     "EnhancedPath@1.1.0-1": "04tgL000000CC8fQAG",
-    "EnhancedPath@1.1.0-2": "04tgL000000CCAHQA4"
+    "EnhancedPath@1.1.0-2": "04tgL000000CCAHQA4",
+    "EnhancedPath@1.1.1-1": "04tgL000000CCBtQAO"
   }
 }

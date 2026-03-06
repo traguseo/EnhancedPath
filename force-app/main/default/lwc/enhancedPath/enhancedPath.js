@@ -39,7 +39,6 @@ export default class EnhancedPath extends LightningElement {
     currentValue = "";
     selectedLabel = "";
     objectInfo = {};
-    resolvedDependenciesByPicklistValue = {}; // Final output: { [controllingValue]: [dependentFieldNames...] }
     nebulaLoggerType = "Not Present";
     isConfettiLoaded = false;
     confettiInstance = null;
@@ -190,7 +189,6 @@ export default class EnhancedPath extends LightningElement {
                 data
             );
             this.objectPicklistData = data;
-            this.resolvedDependenciesByPicklistValue = this._resolveFilteredDependentFields();
         } else if (error) {
             this._logErrorNoToast(
                 `Error getting picklist values by record type for ${this.objectApiName} with record type ${this.recordTypeId}`,
@@ -261,11 +259,15 @@ export default class EnhancedPath extends LightningElement {
         ];
     }
 
+    get resolvedDependenciesByPicklistValue() {
+        return this._resolveFilteredDependentFields();
+    }
+
     get selectedValueDependentFields() {
         if (!this.resolvedDependenciesByPicklistValue || !this.selectedValue) return [];
         const fieldsSet = this.resolvedDependenciesByPicklistValue[this.selectedValue];
         if (!fieldsSet) return [];
-        return Array.from(fieldsSet);
+        return fieldsSet;
     }
 
     get pathDisabledClass() {
@@ -653,6 +655,9 @@ export default class EnhancedPath extends LightningElement {
             if (step.dependentFields?.length) {
                 result[step.value] = new Set([...(result[step.value] || []), ...step.dependentFields]);
             }
+        });
+        Object.keys(result).forEach((key) => {
+            result[key] = Array.from(result[key]);
         });
         console.log(
             "ENHANCEDPATH-Resolved field dependencies by picklist value (including custom defined dependencies):",
