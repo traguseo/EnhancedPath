@@ -379,6 +379,7 @@ export default class EnhancedPath extends LightningElement {
                     "sticky"
                 );
                 this.isSaving = false;
+                this.bypassGroupedSelection = false;
                 return;
             }
         }
