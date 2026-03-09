@@ -67,10 +67,10 @@ public with sharing class EnhancedPathController {
                         keyFields = step.KeyFieldNames__c.split(',');
                     }
                     if (String.isNotBlank(step.DependentFieldNames__c)) {
-                        dependentFields = step.DependentFieldNames__c.split(',');
+                        dependentFields = step.DependentFieldNames__c.replaceAll(' ', '').trim().split(',');
                     }
                     if (String.isNotBlank(step.OptionalFieldNames__c)) {
-                        optionalFields.addAll(step.OptionalFieldNames__c.split(','));
+                        optionalFields.addAll(step.OptionalFieldNames__c.replaceAll(' ', '').trim().split(','));
                     }
                     if (step.RunFlow__c == true && String.isNotBlank(step.FlowApiName__c)) {
                         step.FlowApiName__c = VALID_FLOW_IDS_BY_API_NAME.containsKey(step.FlowApiName__c)

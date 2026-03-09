@@ -1,8 +1,8 @@
 # Enhanced Path
 
-[Install In Production](https://login.salesforce.com/packaging/installPackage.apexp?p0=04tgL000000CEX3QAO)
+[Install In Production](https://login.salesforce.com/packaging/installPackage.apexp?p0=04tgL000000CLn4QAG)
 
-[Install In Sandbox](https://test.salesforce.com/packaging/installPackage.apexp?p0=04tgL000000CEX3QAO)
+[Install In Sandbox](https://test.salesforce.com/packaging/installPackage.apexp?p0=04tgL000000CLn4QAG)
 
 ## Details
 
