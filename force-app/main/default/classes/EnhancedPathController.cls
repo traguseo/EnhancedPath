@@ -64,7 +64,7 @@ public with sharing class EnhancedPathController {
                     List<String> dependentFields = new List<String>();
                     List<String> optionalFields = new List<String>();
                     if (String.isNotBlank(step.KeyFieldNames__c)) {
-                        keyFields = step.KeyFieldNames__c.split(',');
+                        keyFields = step.KeyFieldNames__c.replaceAll(' ', '').trim().split(',');
                     }
                     if (String.isNotBlank(step.DependentFieldNames__c)) {
                         dependentFields = step.DependentFieldNames__c.replaceAll(' ', '').trim().split(',');
@@ -73,8 +73,10 @@ public with sharing class EnhancedPathController {
                         optionalFields.addAll(step.OptionalFieldNames__c.replaceAll(' ', '').trim().split(','));
                     }
                     if (step.RunFlow__c == true && String.isNotBlank(step.FlowApiName__c)) {
-                        step.FlowApiName__c = VALID_FLOW_IDS_BY_API_NAME.containsKey(step.FlowApiName__c)
-                            ? step.FlowApiName__c
+                        step.FlowApiName__c = VALID_FLOW_IDS_BY_API_NAME.containsKey(
+                                step.FlowApiName__c.replaceAll(' ', '').trim()
+                            )
+                            ? step.FlowApiName__c.replaceAll(' ', '').trim()
                             : null;
                     }
                     steps.add(

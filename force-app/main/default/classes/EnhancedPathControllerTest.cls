@@ -17,9 +17,9 @@ private class EnhancedPathControllerTest {
         insert new PathAssistantStep__c(
             Name = 'New',
             PicklistValue__c = 'New',
-            KeyFieldNames__c = 'Company,LastName',
+            KeyFieldNames__c = 'Company, LastName',
             DependentFieldNames__c = 'Email, MobilePhone',
-            OptionalFieldNames__c = 'FirstName',
+            OptionalFieldNames__c = 'FirstName, Title',
             RunFlow__c = true,
             FlowApiName__c = 'Test',
             PathAssistant__r = new PathAssistant__c(ExternalId__c = 'Lead_Status___MASTER__'),
@@ -48,6 +48,11 @@ private class EnhancedPathControllerTest {
             new List<String>{ 'Email', 'MobilePhone' },
             steps[0].dependentFields,
             'Expected dependent field names to match'
+        );
+        Assert.areEqual(
+            new List<String>{ 'FirstName', 'Title' },
+            steps[0].optionalFields,
+            'Expected optional field names to match'
         );
         Assert.areEqual(true, steps[0].runFlow, 'Expected runFlow to be true');
         Assert.areEqual('Test', steps[0].flowApiName, 'Expected flowApiName to be Test');

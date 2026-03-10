@@ -3,7 +3,7 @@
     <fullName>ExternalId__c</fullName>
     <caseSensitive>false</caseSensitive>
     <externalId>true</externalId>
-    <inlineHelpText>A concatenation of ObjectAPIName_FieldAPIName_RecordTypeName_PicklistValue to provide a custom key to upsert and query Path Assistant Steps with. Example: Lead_Status___MASTER__New</inlineHelpText>
+    <inlineHelpText>A concatenation of ObjectAPIName_FieldAPIName_RecordTypeAPIName_PicklistAPIValue to provide a custom key to upsert and query Path Assistant Steps with. Example: Lead_Status___MASTER__New</inlineHelpText>
     <label>ExternalId</label>
     <length>255</length>
     <required>true</required>
