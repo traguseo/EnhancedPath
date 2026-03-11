@@ -25,6 +25,14 @@ export default class EnhancedPathModal extends LightningModal {
     isLoading = true;
     selectedGroupedValue;
 
+    get hasDependentFields() {
+        return this.dependentFields && this.dependentFields.length > 0;
+    }
+
+    get hasOptionalFields() {
+        return this.optionalFields && this.optionalFields.length > 0;
+    }
+
     get picklistFieldLabel() {
         return `Select a ${this.groupLabel} ${this.fieldLabel}:`;
     }

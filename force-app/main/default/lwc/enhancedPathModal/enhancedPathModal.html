@@ -32,7 +32,7 @@
                                         required="true"
                                         disabled="true"
                                     ></lightning-input-field>
-                                    <template lwc:if={dependentFields.length}>
+                                    <template lwc:if={hasDependentFields}>
                                         <template for:each={dependentFields} for:item="dependentField">
                                             <lightning-input-field
                                                 field-name={dependentField}
@@ -42,7 +42,7 @@
                                         </template>
                                     </template>
                                 </lightning-layout-item>
-                                <template lwc:if={optionalFields.length}>
+                                <template lwc:if={hasOptionalFields}>
                                     <lightning-layout-item size="12" large-device-size={editFormLargeDeviceColumnSize}>
                                         <template for:each={optionalFields} for:item="optionalField">
                                             <lightning-input-field

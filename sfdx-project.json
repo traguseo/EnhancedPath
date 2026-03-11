@@ -4,9 +4,9 @@
       "path": "force-app",
       "default": true,
       "package": "EnhancedPath",
-      "versionName": "ver 1.1.8",
-      "versionNumber": "1.1.8.NEXT",
-      "versionDescription": "v1.1.8 adds new features including picklist value grouping, ability to collapse the key fields/guidance panel, prevent backwards movement on the path, to show confetti on successful update, and to show optional fields on the dependent field modal",
+      "versionName": "ver 1.1.9",
+      "versionNumber": "1.1.9.NEXT",
+      "versionDescription": "v1.1.9 adds new features including picklist value grouping, ability to collapse the key fields/guidance panel, prevent backwards movement on the path, to show confetti on successful update, and to show optional fields on the dependent field modal",
       "releaseNotesUrl": "https://github.com/traguseo/EnhancedPath",
       "postInstallUrl": "https://github.com/traguseo/EnhancedPath"
     }
@@ -35,6 +35,7 @@
     "EnhancedPath@1.1.5-1": "04tgL000000CEVRQA4",
     "EnhancedPath@1.1.6-1": "04tgL000000CEX3QAO",
     "EnhancedPath@1.1.7-1": "04tgL000000CLn4QAG",
-    "EnhancedPath@1.1.8-1": "04tgL000000CM9dQAG"
+    "EnhancedPath@1.1.8-1": "04tgL000000CM9dQAG",
+    "EnhancedPath@1.1.9-1": "04tgL000000CSi5QAG"
   }
 }
