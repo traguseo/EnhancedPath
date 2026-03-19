@@ -91,6 +91,11 @@ export default class EnhancedPath extends LightningElement {
                     this._logErrorNoToast(`ENHANCEDPATH-Error loading JSConfetti`, err);
                 });
         }
+        if (localStorage.getItem("enhancedPathCoachingVisibility") === "true") {
+            this.hideGuidancePanel = localStorage.getItem("enhancedPathCoachingVisibility");
+        } else {
+            localStorage.setItem("enhancedPathCoachingVisibility", "false");
+        }
     }
 
     renderedCallback() {
@@ -332,6 +337,7 @@ export default class EnhancedPath extends LightningElement {
 
     handleToggleGuidancePanel() {
         this.hideGuidancePanel = !this.hideGuidancePanel;
+        localStorage.setItem("enhancedPathCoachingVisibility", this.hideGuidancePanel.toString());
     }
 
     isCompleted(value) {

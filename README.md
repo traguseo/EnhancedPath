@@ -1,8 +1,8 @@
 # Enhanced Path
 
-[Install In Production](https://login.salesforce.com/packaging/installPackage.apexp?p0=04tgL000000CSi5QAG)
+[Install In Production](https://login.salesforce.com/packaging/installPackage.apexp?p0=04tgL000000CkALQA0)
 
-[Install In Sandbox](https://test.salesforce.com/packaging/installPackage.apexp?p0=04tgL000000CSi5QAG)
+[Install In Sandbox](https://test.salesforce.com/packaging/installPackage.apexp?p0=04tgL000000CkALQA0)
 
 ## Details
 
@@ -13,7 +13,7 @@ Aims to replicate and further extend the functionality of the SF native Path com
 3. Dynamically resolves infinite levels of nested dependent picklist fields using LDS
 4. Allows the admin to choose if users can hide/collapse the Key Field and Guidance for Success panel during configuration on the Lightning Record Page/Flexipage
 5. Allows the admin to prevent backwards movement of the picklist field during configuration on the Lightning Record Page/Flexipage
-6. Can define additional requried depdendent fields for X picklist value using the `DependentFieldNames__c` field, as well as optional fields using the `OptionalFieldNames__c` field on `PathAssistantStep__c` records
+6. Can define additional required dependent fields for X picklist value using the `DependentFieldNames__c` field, as well as optional fields using the `OptionalFieldNames__c` field on `PathAssistantStep__c` records
 7. Can define a flow to launch when a user attempts to change to X pickist value using the `RunFlow__c` and `FlowApiName__c` fields on `PathAssistantStep__c` records, allowing for pre-commit validation
 8. Can show confetti on successful update to X picklist value using the `ShowConfetti__c` field on `PathAssistantStep__c` records
 9. Can group picklist values together to show as the last step on the path using the `IsGrouped__c` field on `PathAssistantStep__c` records and define if they are considered "lost" (causing them to render as red on the path instead of green) using the `IsLost__c` field
