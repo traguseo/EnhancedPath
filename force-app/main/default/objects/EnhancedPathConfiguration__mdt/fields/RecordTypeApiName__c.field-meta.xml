@@ -1,13 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
-    <fullName>RecordTypeName__c</fullName>
-    <defaultValue>&apos;__MASTER__&apos;</defaultValue>
+    <fullName>RecordTypeApiName__c</fullName>
     <externalId>false</externalId>
-    <inlineHelpText>The Record Type Developer/API Name this Path Assistant is for</inlineHelpText>
+    <fieldManageability>DeveloperControlled</fieldManageability>
+    <inlineHelpText>The Record Type Developer/API Name this Configuration record is for</inlineHelpText>
     <label>Record Type API Name</label>
     <length>255</length>
     <required>true</required>
-    <trackTrending>false</trackTrending>
     <type>Text</type>
     <unique>false</unique>
 </CustomField>

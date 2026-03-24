@@ -92,7 +92,7 @@ export default class EnhancedPath extends LightningElement {
                 });
         }
         if (localStorage.getItem("enhancedPathCoachingVisibility") === "true") {
-            this.hideGuidancePanel = localStorage.getItem("enhancedPathCoachingVisibility");
+            this.hideGuidancePanel = true;
         } else {
             localStorage.setItem("enhancedPathCoachingVisibility", "false");
         }
@@ -418,7 +418,7 @@ export default class EnhancedPath extends LightningElement {
                 groupLabel: this.groupingLabel,
                 groupedValues: this.groupedValues
             });
-        } else if (this.selectedValuePathStep?.runFlow) {
+        } else if (this.selectedValuePathStep?.flowApiName) {
             if (this.selectedValuePathStep?.flowValid) {
                 this._sendToast(
                     "Action Required",
@@ -568,6 +568,10 @@ export default class EnhancedPath extends LightningElement {
                         `${this.fieldLabel} update to ${this.selectedLabel} was cancelled.`,
                         "warning"
                     );
+                    if (this.selectedValuePathStep?.isGrouped) {
+                        this.selectedValue = this.currentValue;
+                        this.selectedLabel = this.currentLabel;
+                    }
                 } else if (result.enhancedPathStatus === "success") {
                     this._sendToast(
                         "Success",
@@ -584,6 +588,10 @@ export default class EnhancedPath extends LightningElement {
                         "error",
                         result.error
                     );
+                    if (this.selectedValuePathStep?.isGrouped) {
+                        this.selectedValue = this.currentValue;
+                        this.selectedLabel = this.currentLabel;
+                    }
                 } else if (result.enhancedPathStatus === "override") {
                     this._sendToast(result.toastTitle, result.toastMessage, result.toastVariant);
                 } else if (result.enhancedPathStatus === "groupingSelected") {

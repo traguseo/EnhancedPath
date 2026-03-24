@@ -2,8 +2,8 @@
 <CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
     <fullName>IsGrouped__c</fullName>
     <defaultValue>false</defaultValue>
+    <fieldManageability>DeveloperControlled</fieldManageability>
     <inlineHelpText>If this picklist value should be grouped with others under the value defined on the Enhanced Path LWC properties on the Flexipage, check this box. Intended to serve as a way to group Closed, Converted, etc. type values</inlineHelpText>
-    <label>Is Grouped?</label>
-    <trackTrending>false</trackTrending>
+    <label>Is Grouped</label>
     <type>Checkbox</type>
 </CustomField>

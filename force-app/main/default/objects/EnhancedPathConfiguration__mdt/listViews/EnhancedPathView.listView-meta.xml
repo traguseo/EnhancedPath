@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ListView xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>EnhancedPathView</fullName>
+    <columns>DeveloperName</columns>
+    <columns>ObjectApiName__c</columns>
+    <columns>FieldApiName__c</columns>
+    <columns>RecordTypeApiName__c</columns>
+    <columns>PicklistApiValue__c</columns>
+    <columns>IsActive__c</columns>
+    <columns>KeyFieldApiNames__c</columns>
+    <columns>GuidanceForSuccess__c</columns>
+    <columns>DependentFieldApiNames__c</columns>
+    <columns>OptionalFieldApiNames__c</columns>
+    <columns>FlowApiName__c</columns>
+    <columns>IsGrouped__c</columns>
+    <columns>IsLost__c</columns>
+    <columns>ShowConfetti__c</columns>
+    <filterScope>Everything</filterScope>
+    <label>EnhancedPathView</label>
+    <language>en_US</language>
+</ListView>

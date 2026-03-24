@@ -4,9 +4,9 @@
       "path": "force-app",
       "default": true,
       "package": "EnhancedPath",
-      "versionName": "ver 1.1.10",
-      "versionNumber": "1.1.10.NEXT",
-      "versionDescription": "v1.1.10 includes bugfixes, new features including picklist value grouping, ability to collapse the key fields/guidance panel, prevent backwards movement on the path, to show confetti on successful update, and to show optional fields on the dependent field modal",
+      "versionName": "ver 1.2.1",
+      "versionNumber": "1.2.1.NEXT",
+      "versionDescription": "v1.2.1 uses Custom Metadata for configuration instead of Custom Objects. See README on Github (https://github.com/traguseo/EnhancedPath) for migration instructions",
       "releaseNotesUrl": "https://github.com/traguseo/EnhancedPath",
       "postInstallUrl": "https://github.com/traguseo/EnhancedPath"
     }
@@ -17,26 +17,6 @@
   "sourceApiVersion": "66.0",
   "packageAliases": {
     "EnhancedPath": "0HogL0000000P9hSAE",
-    "EnhancedPath@0.1.0-1": "04tgL0000004jxpQAA",
-    "EnhancedPath@0.1.0-2": "04tgL0000004jzRQAQ",
-    "EnhancedPath@0.1.0-3": "04tgL0000004k13QAA",
-    "EnhancedPath@0.1.0-4": "04tgL0000005ByvQAE",
-    "EnhancedPath@0.1.0-5": "04tgL0000005C5NQAU",
-    "EnhancedPath@0.1.0-6": "04tgL0000007xGHQAY",
-    "EnhancedPath@0.1.0-7": "04tgL0000007xHtQAI",
-    "EnhancedPath@0.1.0-8": "04tgL0000007xJVQAY",
-    "EnhancedPath@0.1.0-9": "04tgL0000007xbFQAQ",
-    "EnhancedPath@1.1.0-1": "04tgL000000CC8fQAG",
-    "EnhancedPath@1.1.0-2": "04tgL000000CCAHQA4",
-    "EnhancedPath@1.1.1-1": "04tgL000000CCBtQAO",
-    "EnhancedPath@1.1.2-1": "04tgL000000CE8rQAG",
-    "EnhancedPath@1.1.3-1": "04tgL000000CELlQAO",
-    "EnhancedPath@1.1.4-1": "04tgL000000CESDQA4",
-    "EnhancedPath@1.1.5-1": "04tgL000000CEVRQA4",
-    "EnhancedPath@1.1.6-1": "04tgL000000CEX3QAO",
-    "EnhancedPath@1.1.7-1": "04tgL000000CLn4QAG",
-    "EnhancedPath@1.1.8-1": "04tgL000000CM9dQAG",
-    "EnhancedPath@1.1.9-1": "04tgL000000CSi5QAG",
-    "EnhancedPath@1.1.10-1": "04tgL000000CkALQA0"
+    "EnhancedPath@1.2.1-1": "04tgL000000CsCjQAK"
   }
 }

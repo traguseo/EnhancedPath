@@ -2,8 +2,8 @@
 <CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
     <fullName>IsLost__c</fullName>
     <defaultValue>false</defaultValue>
+    <fieldManageability>DeveloperControlled</fieldManageability>
     <inlineHelpText>If this Picklist Value &quot;Is Grouped&quot; but is considered a &quot;Lost&quot; value, this box should be checked. Controls whether the previous values in the path show as complete and the color of the path value container (red for lost, green for won)</inlineHelpText>
     <label>Is Lost?</label>
-    <trackTrending>false</trackTrending>
     <type>Checkbox</type>
 </CustomField>

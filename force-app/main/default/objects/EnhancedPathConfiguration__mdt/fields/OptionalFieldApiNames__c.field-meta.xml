@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>OptionalFieldApiNames__c</fullName>
+    <fieldManageability>DeveloperControlled</fieldManageability>
+    <inlineHelpText>A comma separated list of Field API Names that will be treated as Optional Dependent Fields for this Picklist Value. This is in addition to any field dependencies already defined at the object level and is primarily intended to be used for fields that typically aren&amp;apos;t able to be considered dependent</inlineHelpText>
+    <label>Optional Field API Names</label>
+    <length>131072</length>
+    <type>LongTextArea</type>
+    <visibleLines>3</visibleLines>
+</CustomField>

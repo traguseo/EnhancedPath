@@ -20,82 +20,66 @@ public with sharing class EnhancedPathController {
         for (FlowDefinitionView flow : activeFlows) {
             VALID_FLOW_IDS_BY_API_NAME.put(flow.ApiName, flow.Id);
         }
-        List<PathAssistant__c> pathAssistants = [
+        List<EnhancedPathConfiguration__mdt> configs = [
             SELECT
                 Id,
-                Name,
-                IsActive__c,
-                ObjectApiName__c,
-                FieldApiName__c,
-                RecordTypeName__c,
-                ExternalId__c,
-                (
-                    SELECT
-                        Id,
-                        PicklistValue__c,
-                        KeyFieldNames__c,
-                        Info__c,
-                        ExternalId__c,
-                        RunFlow__c,
-                        FlowApiName__c,
-                        DependentFieldNames__c,
-                        OptionalFieldNames__c,
-                        IsGrouped__c,
-                        IsLost__c,
-                        ShowConfetti__c
-                    FROM PathAssistantSteps__r
-                )
-            FROM PathAssistant__c
+                PicklistApiValue__c,
+                KeyFieldApiNames__c,
+                GuidanceForSuccess__c,
+                FlowApiName__c,
+                DependentFieldApiNames__c,
+                OptionalFieldApiNames__c,
+                IsGrouped__c,
+                IsLost__c,
+                ShowConfetti__c
+            FROM EnhancedPathConfiguration__mdt
             WHERE
                 ObjectApiName__c = :objectApiName
                 AND FieldApiName__c = :fieldApiName
-                AND RecordTypeName__c = :recordTypeName
-                AND ExternalId__c = :objectApiName + '_' + fieldApiName + '_' + recordTypeName
+                AND RecordTypeApiName__c = :recordTypeName
                 AND IsActive__c = TRUE
         ];
-        if (pathAssistants.isEmpty()) {
-            return new List<PathStep>();
-        }
+        List<PathStep> steps = buildPathSteps(configs);
+        return steps;
+    }
+
+    @TestVisible
+    private static List<PathStep> buildPathSteps(List<EnhancedPathConfiguration__mdt> configs) {
         List<PathStep> steps = new List<PathStep>();
-        for (PathAssistant__c pathAssistant : pathAssistants) {
-            if (pathAssistant.PathAssistantSteps__r != null && !pathAssistant.PathAssistantSteps__r.isEmpty()) {
-                for (PathAssistantStep__c step : pathAssistant.PathAssistantSteps__r) {
-                    List<String> keyFields = new List<String>();
-                    List<String> dependentFields = new List<String>();
-                    List<String> optionalFields = new List<String>();
-                    if (String.isNotBlank(step.KeyFieldNames__c)) {
-                        keyFields = step.KeyFieldNames__c.replaceAll(' ', '').trim().split(',');
-                    }
-                    if (String.isNotBlank(step.DependentFieldNames__c)) {
-                        dependentFields = step.DependentFieldNames__c.replaceAll(' ', '').trim().split(',');
-                    }
-                    if (String.isNotBlank(step.OptionalFieldNames__c)) {
-                        optionalFields.addAll(step.OptionalFieldNames__c.replaceAll(' ', '').trim().split(','));
-                    }
-                    if (step.RunFlow__c == true && String.isNotBlank(step.FlowApiName__c)) {
-                        step.FlowApiName__c = VALID_FLOW_IDS_BY_API_NAME.containsKey(
-                                step.FlowApiName__c.replaceAll(' ', '').trim()
-                            )
-                            ? step.FlowApiName__c.replaceAll(' ', '').trim()
-                            : null;
-                    }
-                    steps.add(
-                        new PathStep(
-                            step.PicklistValue__c,
-                            step.Info__c,
-                            keyFields,
-                            step.RunFlow__c,
-                            step.FlowApiName__c,
-                            step.FlowApiName__c != null ? true : false,
-                            dependentFields,
-                            optionalFields,
-                            step.IsGrouped__c,
-                            step.IsLost__c,
-                            step.ShowConfetti__c
-                        )
-                    );
-                }
+        for (EnhancedPathConfiguration__mdt step : configs) {
+            List<String> keyFields = new List<String>();
+            List<String> dependentFields = new List<String>();
+            List<String> optionalFields = new List<String>();
+            if (String.isNotBlank(step.KeyFieldApiNames__c)) {
+                keyFields = step.KeyFieldApiNames__c.replaceAll(' ', '').trim().split(',');
             }
+            if (String.isNotBlank(step.DependentFieldApiNames__c)) {
+                dependentFields = step.DependentFieldApiNames__c.replaceAll(' ', '').trim().split(',');
+            }
+            if (String.isNotBlank(step.OptionalFieldApiNames__c)) {
+                optionalFields.addAll(step.OptionalFieldApiNames__c.replaceAll(' ', '').trim().split(','));
+            }
+            if (String.isNotBlank(step.FlowApiName__c)) {
+                step.FlowApiName__c = VALID_FLOW_IDS_BY_API_NAME.containsKey(
+                        step.FlowApiName__c.replaceAll(' ', '').trim()
+                    )
+                    ? step.FlowApiName__c.replaceAll(' ', '').trim()
+                    : null;
+            }
+            steps.add(
+                new PathStep(
+                    step.PicklistApiValue__c,
+                    step.GuidanceForSuccess__c,
+                    keyFields,
+                    step.FlowApiName__c,
+                    step.FlowApiName__c != null ? true : false,
+                    dependentFields,
+                    optionalFields,
+                    step.IsGrouped__c,
+                    step.IsLost__c,
+                    step.ShowConfetti__c
+                )
+            );
         }
         return steps;
     }
@@ -143,8 +127,6 @@ public with sharing class EnhancedPathController {
         @AuraEnabled
         public List<String> keyFields;
         @AuraEnabled
-        public Boolean runFlow;
-        @AuraEnabled
         public String flowApiName;
         @AuraEnabled
         public Boolean flowValid;
@@ -162,7 +144,6 @@ public with sharing class EnhancedPathController {
             String value,
             String guidance,
             List<String> keyFields,
-            Boolean runFlow,
             String flowApiName,
             Boolean flowValid,
             List<String> dependentFields,
@@ -174,7 +155,6 @@ public with sharing class EnhancedPathController {
             this.value = value;
             this.guidance = guidance != null ? guidance : '';
             this.keyFields = keyFields;
-            this.runFlow = runFlow;
             this.flowApiName = flowApiName;
             this.flowValid = flowValid;
             this.dependentFields = dependentFields;

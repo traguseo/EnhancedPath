@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<LightningComponentBundle xmlns="http://soap.sforce.com/2006/04/metadata">
+    <apiVersion>66.0</apiVersion>
+    <isExposed>true</isExposed>
+    <masterLabel>Auto Next Flow</masterLabel>
+    <description>Automatically navigates a Screen Flow to the next screen when the component loads</description>
+    <targets>
+        <target>lightning__FlowScreen</target>
+    </targets>
+</LightningComponentBundle>

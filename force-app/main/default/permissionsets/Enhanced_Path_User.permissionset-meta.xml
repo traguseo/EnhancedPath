@@ -8,57 +8,23 @@
         <apexClass>MockEnhancedPathCallable</apexClass>
         <enabled>true</enabled>
     </classAccesses>
-    <description>Grants users read access to the PathAssistant__c and PathAssisantStep__c objects. Also grants access to theapex classes needed to use the enhancedPath LWC</description>
-    <fieldPermissions>
-        <editable>false</editable>
-        <field>PathAssistantStep__c.DependentFieldNames__c</field>
-        <readable>true</readable>
-    </fieldPermissions>
-    <fieldPermissions>
-        <editable>false</editable>
-        <field>PathAssistantStep__c.FlowApiName__c</field>
-        <readable>true</readable>
-    </fieldPermissions>
-    <fieldPermissions>
-        <editable>false</editable>
-        <field>PathAssistantStep__c.Info__c</field>
-        <readable>true</readable>
-    </fieldPermissions>
-    <fieldPermissions>
-        <editable>false</editable>
-        <field>PathAssistantStep__c.KeyFieldNames__c</field>
-        <readable>true</readable>
-    </fieldPermissions>
-    <fieldPermissions>
-        <editable>false</editable>
-        <field>PathAssistantStep__c.RunFlow__c</field>
-        <readable>true</readable>
-    </fieldPermissions>
-    <fieldPermissions>
-        <editable>false</editable>
-        <field>PathAssistant__c.IsActive__c</field>
-        <readable>true</readable>
-    </fieldPermissions>
+    <classAccesses>
+        <apexClass>PathAssistantMetadataService</apexClass>
+        <enabled>true</enabled>
+    </classAccesses>
+    <classAccesses>
+        <apexClass>QueueableSyncPathAssistants</apexClass>
+        <enabled>true</enabled>
+    </classAccesses>
+    <classAccesses>
+        <apexClass>ScheduleQueueableSyncPathAssistants</apexClass>
+        <enabled>true</enabled>
+    </classAccesses>
+    <customMetadataTypeAccesses>
+        <enabled>true</enabled>
+        <name>EnhancedPathConfiguration__mdt</name>
+    </customMetadataTypeAccesses>
+    <description>Grants users access to the apex classes needed to use the Enhanced Path LWC</description>
     <hasActivationRequired>false</hasActivationRequired>
     <label>Enhanced Path User</label>
-    <objectPermissions>
-        <allowCreate>false</allowCreate>
-        <allowDelete>false</allowDelete>
-        <allowEdit>false</allowEdit>
-        <allowRead>true</allowRead>
-        <modifyAllRecords>false</modifyAllRecords>
-        <object>PathAssistantStep__c</object>
-        <viewAllFields>true</viewAllFields>
-        <viewAllRecords>false</viewAllRecords>
-    </objectPermissions>
-    <objectPermissions>
-        <allowCreate>false</allowCreate>
-        <allowDelete>false</allowDelete>
-        <allowEdit>false</allowEdit>
-        <allowRead>true</allowRead>
-        <modifyAllRecords>false</modifyAllRecords>
-        <object>PathAssistant__c</object>
-        <viewAllFields>true</viewAllFields>
-        <viewAllRecords>false</viewAllRecords>
-    </objectPermissions>
 </PermissionSet>

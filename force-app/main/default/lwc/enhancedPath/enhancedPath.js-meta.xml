@@ -17,7 +17,7 @@
                     name="fieldApiName"
                     type="String"
                     label="Field API Name"
-                    description="API name of the picklist field to use for the path (e.g., StageName)"
+                    description="API name of the picklist field to use for the path (e.g., Status)"
                     required="true"
                     default="Status"
             />

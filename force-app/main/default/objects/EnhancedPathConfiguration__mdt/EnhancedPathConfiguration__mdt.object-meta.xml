@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObject xmlns="http://soap.sforce.com/2006/04/metadata">
+    <description>Metadata used to supply configuration data to the Enhanced Path LWC. Has fields: Object API Name, Field API Name, Record Type API Name, Picklist API Value, Guidance For Success, Key Fields, Dependent Fields, Optional Fields, Flow API Name, Show Confetti
+
+Records can be created manually or synced via the QueueableSyncPathAssistants class</description>
+    <label>Enhanced Path Configuration</label>
+    <pluralLabel>Enhanced Path Configurations</pluralLabel>
+    <visibility>Public</visibility>
+</CustomObject>

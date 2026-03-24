@@ -2,8 +2,8 @@
 <CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
     <fullName>ShowConfetti__c</fullName>
     <defaultValue>false</defaultValue>
+    <fieldManageability>DeveloperControlled</fieldManageability>
     <inlineHelpText>When a user successfully updates the picklist to this value, should confetti be shown?</inlineHelpText>
     <label>Show Confetti?</label>
-    <trackTrending>false</trackTrending>
     <type>Checkbox</type>
 </CustomField>

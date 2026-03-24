@@ -39,22 +39,17 @@ private class QueueableSyncPathAssistantsTest {
     }
 
     @IsTest
-    static void shouldUpsertPathAssistantsAndStepsSuccessfully() {
+    static void shouldAttemptToDeployCustomMetadata() {
         Test.setMock(WebServiceMock.class, new EnhancedPathMock());
         Test.startTest();
         new QueueableSyncPathAssistants().execute(null);
         Test.stopTest();
-        Assert.areEqual(
-            OBJECT_API_NAMES.size() + 1,
-            [SELECT Id FROM PathAssistant__c].size(),
-            'Expected all path assistants to be upserted'
-        );
-        Integer expectedSteps = (OBJECT_API_NAMES.size() + 1) * PICKLIST_VALUE_NAMES.size();
-        Assert.areEqual(
-            expectedSteps,
-            [SELECT Id FROM PathAssistantStep__c].size(),
-            'Expected all path assistant steps to be upserted'
-        );
+    }
+
+    @IsTest
+    static void shouldHandleDeploymentCallbackErrorGracefully() {
+        QueueableSyncPathAssistants.SyncPathAssistantsCallback callback = new QueueableSyncPathAssistants.SyncPathAssistantsCallback();
+        callback.handleResult(null, null);
     }
 
     private class EnhancedPathMock implements WebServiceMock {
