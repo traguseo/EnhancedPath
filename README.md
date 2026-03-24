@@ -31,9 +31,9 @@ Whether you're guiding reps through a lead status workflow, enforcing data quali
 
 ## Deployment & Setup Information
 
-[Install In Production](https://login.salesforce.com/packaging/installPackage.apexp?p0=04tgL000000CsCjQAK)
+[Install In Production](https://login.salesforce.com/packaging/installPackage.apexp?p0=04tgL000000CsPdQAK)
 
-[Install In Sandbox](https://test.salesforce.com/packaging/installPackage.apexp?p0=04tgL000000CsCjQAK)
+[Install In Sandbox](https://test.salesforce.com/packaging/installPackage.apexp?p0=04tgL000000CsPdQAK)
 
 1. After installing, you'll need to configure the component by creating `EnhancedPathConfiguration__mdt` records for the object(s), record type(s), picklist field(s), and picklist value(s) you want to use it with. There are a couple of ways to get those initial records in place:
    1. Run the `QueueableSyncPathAssistants` job once manually (anon apex snippet: `System.enqueueJob(new QueueableSyncPathAssistants());`)
@@ -91,7 +91,7 @@ I have a flow for each object where I use the Enhanced Path component that I cal
 
 All of my picklist values where I want to perform some pre-commit validation are configured via `EnhancedPathConfiguration__mdt` records that have the router flow as their `FlowApiName__c`.
 
-This allows you to reuse most, if not all of your existing screen flows with the component, and only use the router flow to handle the logic of which flow to call when, based on the context of the record and picklist value. It also allows you to easily add new flows into the mix without having to change any of your existing `EnhancedPathConfiguration__mdt` records — just create a new `EnhancedPathConfiguration__mdt` record for the new picklist value and point it to the router flow, and then add in a new branch in the router flow for that picklist value!
+This allows you to reuse most, if not all of your existing screen flows with the component, and only use the router flow to handle the logic of which flow to call when, based on the context of the record and picklist value.
 
 ## Migration To v1.2+
 

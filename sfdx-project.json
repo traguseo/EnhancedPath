@@ -4,9 +4,9 @@
       "path": "force-app",
       "default": true,
       "package": "EnhancedPath",
-      "versionName": "ver 1.2.1",
-      "versionNumber": "1.2.1.NEXT",
-      "versionDescription": "v1.2.1 uses Custom Metadata for configuration instead of Custom Objects. See README on Github (https://github.com/traguseo/EnhancedPath) for migration instructions",
+      "versionName": "ver 1.2.2",
+      "versionNumber": "1.2.2.NEXT",
+      "versionDescription": "v1.2.2 uses Custom Metadata for configuration instead of Custom Objects. See README on Github (https://github.com/traguseo/EnhancedPath) for migration instructions",
       "releaseNotesUrl": "https://github.com/traguseo/EnhancedPath",
       "postInstallUrl": "https://github.com/traguseo/EnhancedPath"
     }
@@ -17,6 +17,7 @@
   "sourceApiVersion": "66.0",
   "packageAliases": {
     "EnhancedPath": "0HogL0000000P9hSAE",
-    "EnhancedPath@1.2.1-1": "04tgL000000CsCjQAK"
+    "EnhancedPath@1.2.1-1": "04tgL000000CsCjQAK",
+    "EnhancedPath@1.2.2-1": "04tgL000000CsPdQAK"
   }
 }

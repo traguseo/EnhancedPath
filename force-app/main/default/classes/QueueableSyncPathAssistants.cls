@@ -53,7 +53,7 @@ public with sharing class QueueableSyncPathAssistants implements Queueable, Data
                         // defined on the Path Assistant metadata (native SF path settings)
                         if (pathAssistantStep.fieldNames != null && pathAssistantStep.fieldNames.size() > 0) {
                             Metadata.CustomMetadataValue keyFieldNamesValue = new Metadata.CustomMetadataValue();
-                            keyFieldNamesValue.field = 'KeyFieldNames__c';
+                            keyFieldNamesValue.field = 'KeyFieldApiNames__c';
                             keyFieldNamesValue.value = String.join(pathAssistantStep.fieldNames, ',');
                             cmd.values.add(keyFieldNamesValue);
                         }
