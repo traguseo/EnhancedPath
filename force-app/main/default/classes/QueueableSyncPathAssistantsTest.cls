@@ -49,7 +49,13 @@ private class QueueableSyncPathAssistantsTest {
     @IsTest
     static void shouldHandleDeploymentCallbackErrorGracefully() {
         QueueableSyncPathAssistants.SyncPathAssistantsCallback callback = new QueueableSyncPathAssistants.SyncPathAssistantsCallback();
-        callback.handleResult(null, null);
+        callback.handleResult(
+            (Metadata.DeployResult) JSON.deserialize(
+                '{"success":false,"status":"Failed","stateDetail":null,"startDate":"2026-03-25T03:35:51.000Z","rollbackOnError":true,"numberComponentsTotal":1,"numberComponentsDeployed":0,"numberComponentErrors":1,"messages":[{"success":false,"problemType":"Error","problem":"EnhancedPathConfiguration__mdt: could not find fields: X0__c, X1__c, X2__c, X3__c, X4__c, X5__c, X6__c, X7__c, X8__c, X9__c","lineNumber":null,"id":null,"fullName":"EnhancedPathConfiguration__mdt.abc123","fileName":"customMetadata/EnhancedPathConfiguration__mdt.abc123.md","deleted":false,"createdDate":"2026-03-25T03:35:51.911Z","created":false,"componentType":"CustomMetadata","columnNumber":null,"changed":false},{"success":true,"problemType":null,"problem":null,"lineNumber":null,"id":null,"fullName":"package.xml","fileName":"package.xml","deleted":false,"createdDate":"2026-03-25T03:35:51.925Z","created":false,"componentType":null,"columnNumber":null,"changed":true}],"lastModifiedDate":"2026-03-25T03:35:51.000Z","ignoreWarnings":false,"id":"0AfgL00000JKcKjSAL","errorStatusCode":null,"errorMessage":null,"done":true,"details":{"componentSuccesses":[{"success":true,"problemType":null,"problem":null,"lineNumber":null,"id":null,"fullName":"package.xml","fileName":"package.xml","deleted":false,"createdDate":"2026-03-25T03:35:51.925Z","created":false,"componentType":null,"columnNumber":null,"changed":true}],"componentFailures":[{"success":false,"problemType":"Error","problem":"EnhancedPathConfiguration__mdt: could not find fields: X0__c, X1__c, X2__c, X3__c, X4__c, X5__c, X6__c, X7__c, X8__c, X9__c","lineNumber":null,"id":null,"fullName":"EnhancedPathConfiguration__mdt.abc123","fileName":"customMetadata/EnhancedPathConfiguration__mdt.abc123.md","deleted":false,"createdDate":"2026-03-25T03:35:51.911Z","created":false,"componentType":"CustomMetadata","columnNumber":null,"changed":false}]},"createdDate":"2026-03-25T03:35:51.000Z","createdByName":"tyler264@agentforce.com","createdBy":"005gL000005jaE9","completedDate":"2026-03-25T03:35:51.000Z","checkOnly":false,"canceledByName":null,"canceledBy":"000000000000000"}',
+                Metadata.DeployResult.class
+            ),
+            null
+        );
     }
 
     private class EnhancedPathMock implements WebServiceMock {

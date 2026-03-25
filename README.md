@@ -10,8 +10,8 @@ Whether you're guiding reps through a lead status workflow, enforcing data quali
 # Table of Contents
 1. [Features](#features)
 2. [Deployment & Setup Information](#deployment--setup-information)
-   1. [YouTube Video Setup Guide](#youtube-video-demo--setup-guide)
-   2. [EnhancedPathConfiguration__mdt Fields](#enhancedpathconfiguration-fields)
+   1. [YouTube Video Demo](#youtube-video-demo)
+   2. [EnhancedPathConfiguration Metadata Fields](#enhancedpathconfiguration-fields)
 3. [Flow Input/Output Details and Overriding Toast Messages](#flow-inputoutput-details-and-overriding-toast-messages)
 4. [How I Use This & The "Router Flow" Pattern](#how-i-use-this--the-router-flow-pattern)
 5. [Migration To v1.2+](#migration-to-v12)
@@ -31,9 +31,9 @@ Whether you're guiding reps through a lead status workflow, enforcing data quali
 
 ## Deployment & Setup Information
 
-[Install In Production](https://login.salesforce.com/packaging/installPackage.apexp?p0=04tgL000000CsPdQAK)
+[Install In Production](https://login.salesforce.com/packaging/installPackage.apexp?p0=04tgL000000Csr3QAC)
 
-[Install In Sandbox](https://test.salesforce.com/packaging/installPackage.apexp?p0=04tgL000000CsPdQAK)
+[Install In Sandbox](https://test.salesforce.com/packaging/installPackage.apexp?p0=04tgL000000Csr3QAC)
 
 1. After installing, you'll need to configure the component by creating `EnhancedPathConfiguration__mdt` records for the object(s), record type(s), picklist field(s), and picklist value(s) you want to use it with. There are a couple of ways to get those initial records in place:
    1. Run the `QueueableSyncPathAssistants` job once manually (anon apex snippet: `System.enqueueJob(new QueueableSyncPathAssistants());`)

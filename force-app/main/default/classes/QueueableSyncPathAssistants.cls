@@ -125,10 +125,27 @@ public with sharing class QueueableSyncPathAssistants implements Queueable, Data
                     new Map<String, Object>{
                         'loggingLevel' => 'ERROR',
                         'message' => 'QueueableSyncPathAssistants failed to deploy Custom Metadata records with error:\n\n' +
-                        result?.errorMessage
+                        combineAllComponentFailureMessages(result)
                     }
                 );
             }
+        }
+
+        private String combineAllComponentFailureMessages(Metadata.DeployResult result) {
+            String combinedMessage = '';
+            if (result?.details?.componentFailures != null) {
+                for (Metadata.DeployMessage failure : result.details.componentFailures) {
+                    combinedMessage +=
+                        'Problem with component: ' +
+                        failure.componentType +
+                        ' named ' +
+                        failure.fullName +
+                        '. Error message: ' +
+                        failure.problem +
+                        '\n';
+                }
+            }
+            return combinedMessage;
         }
     }
 }

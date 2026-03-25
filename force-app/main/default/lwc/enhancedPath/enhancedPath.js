@@ -569,8 +569,8 @@ export default class EnhancedPath extends LightningElement {
                         "warning"
                     );
                     if (this.selectedValuePathStep?.isGrouped) {
-                        this.selectedValue = this.currentValue;
-                        this.selectedLabel = this.currentLabel;
+                        this.selectedValue = this.groupingBackendValue;
+                        this.selectedLabel = this.groupingLabel;
                     }
                 } else if (result.enhancedPathStatus === "success") {
                     this._sendToast(
@@ -589,11 +589,18 @@ export default class EnhancedPath extends LightningElement {
                         result.error
                     );
                     if (this.selectedValuePathStep?.isGrouped) {
-                        this.selectedValue = this.currentValue;
-                        this.selectedLabel = this.currentLabel;
+                        this.selectedValue = this.groupingBackendValue;
+                        this.selectedLabel = this.groupingLabel;
                     }
                 } else if (result.enhancedPathStatus === "override") {
                     this._sendToast(result.toastTitle, result.toastMessage, result.toastVariant);
+                    if (result.toastVariant === "success") {
+                        this.currentValue = this.selectedValue;
+                        this.currentLabel = this.selectedLabel;
+                    } else if (this.selectedValuePathStep?.isGrouped) {
+                        this.selectedValue = this.groupingBackendValue;
+                        this.selectedLabel = this.groupingLabel;
+                    }
                 } else if (result.enhancedPathStatus === "groupingSelected") {
                     this.selectedValue = result.groupingValue;
                     this.selectedLabel = result.groupingLabel;
