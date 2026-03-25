@@ -31,9 +31,9 @@ Whether you're guiding reps through a lead status workflow, enforcing data quali
 
 ## Deployment & Setup Information
 
-[Install In Production](https://login.salesforce.com/packaging/installPackage.apexp?p0=04tgL000000Csr3QAC)
+[Install In Production](https://login.salesforce.com/packaging/installPackage.apexp?p0=04tgL000000CssfQAC)
 
-[Install In Sandbox](https://test.salesforce.com/packaging/installPackage.apexp?p0=04tgL000000Csr3QAC)
+[Install In Sandbox](https://test.salesforce.com/packaging/installPackage.apexp?p0=04tgL000000CssfQAC)
 
 1. After installing, you'll need to configure the component by creating `EnhancedPathConfiguration__mdt` records for the object(s), record type(s), picklist field(s), and picklist value(s) you want to use it with. There are a couple of ways to get those initial records in place:
    1. Run the `QueueableSyncPathAssistants` job once manually (anon apex snippet: `System.enqueueJob(new QueueableSyncPathAssistants());`)

@@ -597,6 +597,7 @@ export default class EnhancedPath extends LightningElement {
                     if (result.toastVariant === "success") {
                         this.currentValue = this.selectedValue;
                         this.currentLabel = this.selectedLabel;
+                        this._showConfettiIfRelevant();
                     } else if (this.selectedValuePathStep?.isGrouped) {
                         this.selectedValue = this.groupingBackendValue;
                         this.selectedLabel = this.groupingLabel;
