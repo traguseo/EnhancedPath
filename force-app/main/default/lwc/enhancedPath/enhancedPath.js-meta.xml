@@ -6,6 +6,8 @@
     <masterLabel>Enhanced Path</masterLabel>
     <targets>
         <target>lightning__RecordPage</target>
+        <target>lightningCommunity__Page</target>
+        <target>lightningCommunity__Default</target>
     </targets>
     <targetConfigs>
         <targetConfig targets="lightning__RecordPage">
@@ -13,6 +15,35 @@
                 <supportedFormFactor type="Small"/>
                 <supportedFormFactor type="Large"/>
             </supportedFormFactors>
+            <property
+                    name="fieldApiName"
+                    type="String"
+                    label="Field API Name"
+                    description="API name of the picklist field to use for the path (e.g., Status)"
+                    required="true"
+                    default="Status"
+            />
+            <property name="groupingLabel" type="String" label="Grouping Label" description="Label to group picklist values under" default="Closed" required="true"/>
+            <property name="allowHideKeyFieldsAndGuidance" type="Boolean" label="Allow Users To Collapse Key Fields and Guidance" description="Allow users to collapse the key fields and guidance panel" default="false"/>
+            <property name="preventBackwardsMovement" type="Boolean" label="Prevent Backwards Movement" description="Prevent users from moving the path backwards" default="false"/>
+        </targetConfig>
+        <targetConfig targets="lightningCommunity__Default">
+            <property
+                    name="recordId"
+                    type="String"
+                    label="Record ID (put {!recordId} here)"
+                    description="Put {!recordId} here"
+                    required="true"
+                    default="Placeholder, replace with {!recordId}"
+            />
+            <property
+                    name="objectApiName"
+                    type="String"
+                    label="Object API Name"
+                    description="API name of the object the path (e.g., Case)"
+                    required="true"
+                    default="Case"
+            />
             <property
                     name="fieldApiName"
                     type="String"
