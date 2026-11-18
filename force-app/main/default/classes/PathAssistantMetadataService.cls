@@ -3251,7 +3251,7 @@ public class PathAssistantMetadataService {
         private String[] field_order_type_info = new List<String>{ 'done', 'id', 'message', 'state', 'statusCode' };
     }
     public class MetadataPort {
-        public String endpoint_x = URL.getOrgDomainUrl().toExternalForm() + '/services/Soap/m/64.0';
+        public String endpoint_x = URL.getOrgDomainUrl().toExternalForm() + '/services/Soap/m/68.0';
         public Map<String, String> inputHttpHeaders_x;
         public Map<String, String> outputHttpHeaders_x;
         public String clientCertName_x;

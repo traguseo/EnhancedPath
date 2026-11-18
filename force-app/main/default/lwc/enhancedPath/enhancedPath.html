@@ -62,48 +62,46 @@
                         </div>
                     </div>
                 </lightning-layout-item>
-                <!-- Button for Desktop -->
-                <lightning-layout-item
-                    flexibility="shrink"
-                    class="slds-p-right_small slds-align_absolute-center slds-show_medium"
-                >
-                    <lightning-button
-                        variant="brand"
-                        label={buttonLabel}
-                        onclick={handleMarkComplete}
-                        disabled={disableCompleteButton}
-                        icon-name={completeButtonIconName}
-                    ></lightning-button>
-                </lightning-layout-item>
-                <!-- Display Selected Label For Tablet/Mobile -->
-                <lightning-layout-item
-                    size="12"
-                    flexibility="shrink"
-                    class="slds-hide_medium slds-text-align_center slds-p-top_small slds-p-bottom_small"
-                >
-                    <strong>Selected {fieldLabel}:</strong> {selectedLabel}
-                </lightning-layout-item>
-                <!-- Buttons for Tablet/Mobile -->
-                <lightning-layout-item
-                    size="12"
-                    flexibility="grow"
-                    class="slds-p-bottom_x-small slds-hide_medium slds-p-left_small slds-p-right_small"
-                >
-                    <lightning-button
-                        variant="brand"
-                        label={buttonLabel}
-                        onclick={handleMarkComplete}
-                        disabled={disableCompleteButton}
-                        icon-name={completeButtonIconName}
-                        stretch
-                    ></lightning-button>
-                </lightning-layout-item>
-                <template lwc:if={showCollapseButton}>
+                <template lwc:if={showPathUpdateButton}>
+                    <!-- Button for Desktop -->
+                    <lightning-layout-item
+                        flexibility="shrink"
+                        class="slds-p-right_small slds-align_absolute-center slds-show_medium"
+                    >
+                        <lightning-button
+                            variant="brand"
+                            label={buttonLabel}
+                            onclick={handleMarkComplete}
+                            disabled={disableCompleteButton}
+                            icon-name={completeButtonIconName}
+                        ></lightning-button>
+                    </lightning-layout-item>
+                    <!-- Display Selected Label For Tablet/Mobile -->
+                    <lightning-layout-item
+                        size="12"
+                        flexibility="shrink"
+                        class="slds-hide_medium slds-text-align_center slds-p-top_small slds-p-bottom_small"
+                    >
+                        <strong>Selected {fieldLabel}:</strong> {selectedLabel}
+                    </lightning-layout-item>
+                    <!-- Buttons for Tablet/Mobile -->
                     <lightning-layout-item
                         size="12"
                         flexibility="grow"
                         class="slds-p-bottom_x-small slds-hide_medium slds-p-left_small slds-p-right_small"
                     >
+                        <lightning-button
+                            variant="brand"
+                            label={buttonLabel}
+                            onclick={handleMarkComplete}
+                            disabled={disableCompleteButton}
+                            icon-name={completeButtonIconName}
+                            stretch
+                        ></lightning-button>
+                    </lightning-layout-item>
+                </template>
+                <template lwc:if={showCollapseButton}>
+                    <lightning-layout-item size="12" flexibility="grow" class={collapseButtonClass}>
                         <lightning-button
                             variant="neutral"
                             label={collapseButtonLabel}

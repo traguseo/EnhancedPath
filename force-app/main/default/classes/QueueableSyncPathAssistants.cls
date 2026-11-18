@@ -3,7 +3,7 @@
  */
 
 public with sharing class QueueableSyncPathAssistants implements Queueable, Database.AllowsCallouts {
-    private static final Double API_VERSION = 66.0;
+    private static final Double API_VERSION = 68.0;
     private static final PathAssistantMetadataService.MetadataPort service = createService();
     private static final String CUSTOM_METADATA_TYPE = 'EnhancedPathConfiguration__mdt';
 

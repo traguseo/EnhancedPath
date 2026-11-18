@@ -21,6 +21,7 @@ export default class EnhancedPath extends LightningElement {
     @api allowHideKeyFieldsAndGuidance;
     @api groupingLabel;
     @api preventBackwardsMovement;
+    @api hidePathUpdateButton;
     hasGroupedValues = false;
     bypassGroupedSelection = false;
     groupingBackendValue = "enhancedpathgrouping";
@@ -324,6 +325,12 @@ export default class EnhancedPath extends LightningElement {
         return this.hideGuidancePanel ? "Show More" : "Show Less";
     }
 
+    get collapseButtonClass() {
+        return this.hidePathUpdateButton
+            ? "slds-p-bottom_x-small slds-hide_medium slds-p-left_small slds-p-right_small slds-p-top_small slds-p-bottom_small"
+            : "slds-p-bottom_x-small slds-hide_medium slds-p-left_small slds-p-right_small";
+    }
+
     get groupedValues() {
         if (!this.pathSteps || !this.picklistValues) return [];
 
@@ -333,6 +340,10 @@ export default class EnhancedPath extends LightningElement {
                 value: step.value,
                 label: this.picklistValues.find((pv) => pv.value === step.value)?.label || step.value
             }));
+    }
+
+    get showPathUpdateButton() {
+        return !this.hidePathUpdateButton;
     }
 
     handleToggleGuidancePanel() {
